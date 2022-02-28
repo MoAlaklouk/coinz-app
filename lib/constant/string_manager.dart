@@ -12,6 +12,14 @@ class AppString {
   static const String lastUpData = 'اخر تحديث :';
   static const String textfavoriteCoinz = 'ريبل';
   static const String textfavoriteCoinzEn = 'Ripple';
+  static const String price = '10,000.20';
+  static const String dollarSign = ' \$ ';
+  static const String priceText = 'السعر';
+  static const String coinzName = 'العملة';
+  static const String conizRate = 'التداول';
+
+
+
 
 
 

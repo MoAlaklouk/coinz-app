@@ -1,4 +1,4 @@
-import 'package:sizer/sizer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppMargin {
   static double m0 = 0.0.h;
@@ -10,11 +10,15 @@ class AppMargin {
   static double m6 = 6.0.h;
   static double m7 = 7.0.h;
   static double m8 = 8.0.h;
+  static double m10 = 10.0.h;
+
   static double m12 = 12.0.h;
   static double m14 = 14.0.h;
   static double m16 = 16.0.h;
   static double m18 = 18.0.h;
   static double m20 = 20.0.h;
+  static double m25 = 25.0.h;
+  static double m30 = 30.0.h;
 }
 
 class AppPadding {
@@ -99,6 +103,12 @@ class AppHeightSize {
   static double sh32 = 32.0.h;
 
   static double sh40 = 40.0.h;
+  static double sh41 = 41.0.h;
+
+  static double sh45 = 45.0.h;
+
+  static double sh50 = 50.0.h;
+
   static double sh60 = 60.0.h;
   static double sh65 = 65.0.h;
   static double sh80 = 80.0.h;
@@ -130,7 +140,10 @@ class AppWidthSize {
   static double sw80 = 80.0.w;
   static double sw96 = 96.0.w;
   static double sw100 = 100.0.w;
+
   static double sw120 = 120.0.w;
+  static double sw155 = 155.0.w;
+
   static double sw200 = 200.0.w;
 }
 
