@@ -1,5 +1,6 @@
 import 'package:coinz_app/constant/color_manger.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/date_symbol_data_file.dart';
 
 import 'app_router/app_router.dart';
 import '../constant/theme_manager.dart';
@@ -14,17 +15,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: ColorManager.white,
-        statusBarIconBrightness: Brightness.dark,));
+      statusBarColor: ColorManager.white,
+      statusBarIconBrightness: Brightness.dark,
+    ));
     return ScreenUtilInit(
       minTextAdapt: true,
-      builder: () => GetMaterialApp(
-        locale: const Locale('ar'),
-        debugShowCheckedModeBanner: false,
-        initialBinding: Binding(),
-        getPages: appRoutes,
-        theme: getApplicationTheme(),
-      ),
+      builder: () {
+    
+        return GetMaterialApp(
+          locale: const Locale('ar'),
+          debugShowCheckedModeBanner: false,
+          initialBinding: Binding(),
+          getPages: appRoutes,
+          theme: getApplicationTheme(),
+        );
+      },
     );
   }
 }

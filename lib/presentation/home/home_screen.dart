@@ -49,12 +49,10 @@ class HomeScreen extends StatelessWidget {
             height: AppHeightSize.sh8,
           ),
           titelBar(),
-           SizedBox(
+          SizedBox(
             height: AppHeightSize.sh8,
           ),
-          Expanded(
-              child:
-                  Container(height: AppHeightSize.sh200, child: coinzList())),
+          Expanded(child: coinzList(context)),
         ],
       ),
     );
@@ -87,6 +85,7 @@ class HomeScreen extends StatelessWidget {
       );
 
   Widget favoriteCoinzItem() => Card(
+        elevation: AppSize.s0,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSize.s8)),
@@ -160,7 +159,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       );
-  Widget coinzList() => Container(
+  Widget coinzList(context) => Container(
         margin: EdgeInsets.all(AppMargin.m3),
         child: ListView.separated(
           itemBuilder: (context, index) => coinzListItem(index),
@@ -236,4 +235,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ));
+
+ 
 }

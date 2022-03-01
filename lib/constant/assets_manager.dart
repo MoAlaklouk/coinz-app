@@ -23,4 +23,6 @@ class AssetsManager {
       '$IMAGE_PATH/report_icon_noAc.svg';
   static const String homeCoinzIcon = '$IMAGE_PATH/ripple_coinz_icon.svg';
   static const String increaseIcon = '$IMAGE_PATH/increase_icon.svg';
+  static const String newAlartButtonImage = '$IMAGE_PATH/button_image.png';
+
 }

@@ -15,10 +15,22 @@ class AppMargin {
   static double m12 = 12.0.h;
   static double m14 = 14.0.h;
   static double m16 = 16.0.h;
+  static double m17 = 17.0.h;
+  static double m17_5 = 17.5.h;
+
   static double m18 = 18.0.h;
   static double m20 = 20.0.h;
+  static double m23 = 23.0.h;
+
   static double m25 = 25.0.h;
+  static double m27 = 27.0.h;
+  static double m29 = 29.0.h;
+
   static double m30 = 30.0.h;
+  static double m32_5 = 32.5.h;
+  static double m38 = 38.0.h;
+
+  static double m82 = 82.0.h;
 }
 
 class AppPadding {
@@ -38,6 +50,9 @@ class AppPadding {
   static double p16 = 16.0.h;
   static double p18 = 18.0.h;
   static double p20 = 20.0.h;
+  static double p21 = 21.0.h;
+
+  static double p23 = 23.0.h;
 }
 
 class AppSize {
@@ -95,12 +110,17 @@ class AppHeightSize {
   static double sh16 = 16.0.h;
   static double sh18 = 18.0.h;
   static double sh20 = 20.0.h;
+  static double sh21 = 21.0.h;
+
   static double sh23 = 23.0.h;
   static double sh25 = 25.0.h;
   static double sh28 = 28.0.h;
   static double sh35 = 35.0.h;
   static double sh30 = 30.0.h;
+  static double sh31 = 31.0.h;
+
   static double sh32 = 32.0.h;
+  static double sh38 = 38.0.h;
 
   static double sh40 = 40.0.h;
   static double sh41 = 41.0.h;
@@ -108,14 +128,22 @@ class AppHeightSize {
   static double sh45 = 45.0.h;
 
   static double sh50 = 50.0.h;
+  static double sh55 = 55.0.h;
+
+  static double sh56 = 56.0.h;
 
   static double sh60 = 60.0.h;
   static double sh65 = 65.0.h;
   static double sh80 = 80.0.h;
+  static double sh90 = 90.0.h;
+
   static double sh96 = 96.0.h;
+  static double sh94 = 94.0.h;
+
   static double sh100 = 100.0.h;
   static double sh120 = 120.0.h;
   static double sh200 = 200.0.h;
+  static double sh300 = 300.0.h;
 }
 
 class AppWidthSize {
@@ -126,7 +154,11 @@ class AppWidthSize {
   static double sw6 = 6.0.w;
   static double sw1_5 = 1.5.w;
   static double sw8 = 8.0.w;
+  static double sw9 = 9.0.w;
+
   static double sw10 = 10.0.w;
+  static double sw11 = 11.0.w;
+
   static double sw12 = 12.0.w;
   static double sw14 = 14.0.w;
   static double sw15 = 15.0.w;
@@ -134,6 +166,9 @@ class AppWidthSize {
   static double sw18 = 18.0.w;
   static double sw20 = 20.0.w;
   static double sw28 = 28.0.w;
+  static double sw29 = 29.0.w;
+
+
   static double sw40 = 40.0.w;
   static double sw60 = 60.0.w;
   static double sw65 = 65.0.w;
@@ -142,9 +177,12 @@ class AppWidthSize {
   static double sw100 = 100.0.w;
 
   static double sw120 = 120.0.w;
+  static double sw123 = 123.0.w;
+
   static double sw155 = 155.0.w;
 
   static double sw200 = 200.0.w;
+  static double sw300 = 300.0.w;
 }
 
 class AppDuration {
