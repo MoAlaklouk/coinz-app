@@ -63,8 +63,12 @@ class AppSize {
   static const double s1_5 = 1.5;
   static const double s2 = 2.0;
   static const double s4 = 4.0;
+  static const double s5 = 5.0;
+
   static const double s6 = 6.0;
   static const double s8 = 8.0;
+  static const double s9 = 9.0;
+
   static const double s10 = 10.0;
   static const double s12 = 12.0;
   static const double s14 = 14.0;
@@ -143,7 +147,11 @@ class AppHeightSize {
   static double sh100 = 100.0.h;
   static double sh120 = 120.0.h;
   static double sh200 = 200.0.h;
+  static double sh280 = 280.0.h;
+
   static double sh300 = 300.0.h;
+  static double sh500 = 500.0.h;
+
 }
 
 class AppWidthSize {

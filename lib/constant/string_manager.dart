@@ -44,4 +44,6 @@ class AppString {
 ''';
 
   static const String shareString = 'مشاركة';
+  static const String pressToAddNew = 'اضغط للاضافة';
+
 }

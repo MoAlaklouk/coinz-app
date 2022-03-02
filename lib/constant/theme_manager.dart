@@ -36,12 +36,11 @@ ThemeData getApplicationTheme() {
         color: ColorManager.white,
         fontSize: FontSize.s16,
       ),
-      
     ),
     buttonTheme: ButtonThemeData(
-      shape: StadiumBorder(),
+      hoverColor: ColorManager.grey,
       disabledColor: ColorManager.grey1,
-      splashColor: ColorManager.lightGrey,
+      splashColor: ColorManager.grey,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
