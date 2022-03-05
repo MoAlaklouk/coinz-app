@@ -54,25 +54,25 @@ ThemeData getApplicationTheme() {
 
     textTheme: TextTheme(
       headline1:
-          getBoldStyle(color: ColorManager.white, fontSize: AppSize.s12.sp),
+          getBoldStyle(color: ColorManager.black, fontSize: AppSize.s12.sp),
       headline2:
-          getSemiBoldStyle(color: ColorManager.white, fontSize: AppSize.s10.sp),
+          getSemiBoldStyle(color: ColorManager.black, fontSize: AppSize.s10.sp),
       headline3: getBoldStyle(
-        color: ColorManager.white,
+        color: ColorManager.black,
         fontSize: AppSize.s12.sp,
       ),
       headline4:
-          getRegularStyle(color: ColorManager.white, fontSize: AppSize.s18.sp),
+          getRegularStyle(color: ColorManager.black, fontSize: AppSize.s18.sp),
       headline5:
-          getSemiBoldStyle(color: ColorManager.white, fontSize: AppSize.s20.sp),
+          getSemiBoldStyle(color: ColorManager.black, fontSize: AppSize.s20.sp),
       headline6:
-          getSemiBoldStyle(color: ColorManager.white, fontSize: AppSize.s20.sp),
+          getSemiBoldStyle(color: ColorManager.black, fontSize: AppSize.s20.sp),
       subtitle1:
-          getMediumStyle(color: ColorManager.white, fontSize: AppSize.s14.sp),
+          getMediumStyle(color: ColorManager.black, fontSize: AppSize.s14.sp),
       subtitle2:
-          getMediumStyle(color: ColorManager.white, fontSize: AppSize.s14.sp),
-      caption: getLightStyle(color: ColorManager.white),
-      bodyText1: getLightStyle(color: ColorManager.white),
+          getMediumStyle(color: ColorManager.black, fontSize: AppSize.s14.sp),
+      caption: getLightStyle(color: ColorManager.black),
+      bodyText1: getLightStyle(color: ColorManager.black),
     ),
 
     inputDecorationTheme: InputDecorationTheme(
@@ -83,13 +83,13 @@ ThemeData getApplicationTheme() {
         errorStyle: getRegularStyle(color: ColorManager.error),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: ColorManager.primary,
+            color: ColorManager.lightGreyBorder,
             width: AppSize.s1_5,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: ColorManager.primary,
+            color: ColorManager.lightGreyBorder,
             width: AppSize.s1_5,
           ),
         ),
@@ -101,7 +101,7 @@ ThemeData getApplicationTheme() {
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: ColorManager.primary,
+            color: ColorManager.lightGreyBorder,
             width: AppSize.s1_5,
           ),
         ),

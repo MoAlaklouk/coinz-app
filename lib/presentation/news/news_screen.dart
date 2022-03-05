@@ -17,20 +17,23 @@ class NewsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppPadding.p21),
-      child: Scaffold(
-        body: Column(
-          children: [
-            SizedBox(
-              height: AppHeightSize.sh38,
-            ),
-            newsTitel(),
-            SizedBox(
-              height: AppHeightSize.sh5,
-            ),
-            Expanded(child: listNews()),
-          ],
+    return GetBuilder<NewsController>(
+      builder: (controller) => Padding(
+        padding: EdgeInsets.symmetric(horizontal: AppPadding.p21),
+        child: Scaffold(
+          body: Column(
+            children: [
+              SizedBox(
+                height: AppHeightSize.sh38,
+              ),
+              newsTitel(),
+              SizedBox(
+                height: AppHeightSize.sh5,
+              ),
+              // Expanded(child: listNews()),
+              Expanded(child: lodeMore(controller)),
+            ],
+          ),
         ),
       ),
     );
@@ -47,12 +50,12 @@ class NewsScreen extends StatelessWidget {
         ),
       );
 
-  Widget listNews() => ListView.separated(
+  Widget listNews(NewsController controller) => ListView.separated(
         itemBuilder: (context, index) => newsItem(),
         separatorBuilder: (context, index) => SizedBox(
           height: AppHeightSize.sh10,
         ),
-        itemCount: 5,
+        itemCount: controller.count,
         physics: BouncingScrollPhysics(),
       );
 
@@ -121,6 +124,21 @@ class NewsScreen extends StatelessWidget {
               )
             ],
           ),
+        ),
+      );
+
+  Widget lodeMore(NewsController controller) => Container(
+        child: LoadMore(
+          isFinish: controller.count >= 60,
+          onLoadMore: controller.loadMore,
+          child: listNews(controller),
+          whenEmptyLoad: false,
+          textBuilder: (status) {
+            if (status == LoadMoreStatus.nomore)
+              return AppString.endLoading;
+            else
+              return AppString.isLoading;
+          },
         ),
       );
 }

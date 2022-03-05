@@ -11,8 +11,8 @@ class LayoutController extends GetxController {
   int currantPageIndex = 0;
   List<Widget> secreens = [
     const HomeScreen(),
-    const AlartScreen(),
-    const NewsScreen(),
+     AlartScreen(),
+     NewsScreen(),
   ];
 
   List<BottomNavigationBarItem> bottomNavIcon = [

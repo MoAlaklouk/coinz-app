@@ -1,3 +1,8 @@
+import 'package:coinz_app/constant/color_manger.dart';
+import 'package:coinz_app/constant/fonts_manager.dart';
+import 'package:coinz_app/constant/style_manager.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../constant/assets_manager.dart';
 import '../../constant/string_manager.dart';
 import 'splash_controller.dart';
@@ -36,13 +41,13 @@ Widget backGround() => Column(
             children: <Widget>[
               Expanded(
                 child: SvgPicture.asset(
-                  AssetsManager.splashGrid_2,
+                  AssetsManager.splashGrid_1,
                   fit: BoxFit.fill,
                 ),
               ),
               Expanded(
                 child: SvgPicture.asset(
-                  AssetsManager.splashGrid_1,
+                  AssetsManager.splashGrid_2,
                   fit: BoxFit.fill,
                 ),
               ),
@@ -57,13 +62,13 @@ Widget backGround() => Column(
                 children: <Widget>[
                   Expanded(
                     child: SvgPicture.asset(
-                      AssetsManager.splashGrid_4,
+                      AssetsManager.splashGrid_3,
                       fit: BoxFit.fill,
                     ),
                   ),
                   Expanded(
                     child: SvgPicture.asset(
-                      AssetsManager.splashGrid_3,
+                      AssetsManager.splashGrid_4,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -84,6 +89,7 @@ Widget iconBackGround() => Container(
 Widget textSplash(context) => Container(
       child: Text(
         AppString.splashText,
-        style: Theme.of(context).textTheme.headline6,
+        style: getSemiBoldStyle(
+            color: ColorManager.white, fontSize: FontSize.s25.sp),
       ),
     );

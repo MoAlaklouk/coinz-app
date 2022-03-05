@@ -170,7 +170,7 @@ class HomeScreen extends StatelessWidget {
   Widget titelBar() => Container(
         height: AppHeightSize.sh41,
         padding: EdgeInsets.symmetric(horizontal: AppPadding.p5),
-        color: ColorManager.lightGrey.withOpacity(.2),
+        color: ColorManager.lightGreyBorder,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

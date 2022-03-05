@@ -1,4 +1,5 @@
-import 'package:coinz_app/presentation/news/news_screen.dart';
+import 'package:coinz_app/presentation/alart_coinz/alart_coinz_controller.dart';
+import 'package:coinz_app/presentation/news/news_controller.dart';
 import 'package:coinz_app/presentation/news_details/news_details_screen.dart';
 import 'package:get/get.dart';
 
@@ -10,7 +11,9 @@ class Binding extends Bindings {
   void dependencies() {
     Get.lazyPut(() => SplashController(), fenix: true);
     Get.lazyPut(() => LayoutController(), fenix: true);
-    Get.lazyPut(() => NewsScreen(), fenix: true);
+    Get.lazyPut(() => NewsController(), fenix: true);
     Get.lazyPut(() => NewsDetailsScreen(), fenix: true);
+    Get.lazyPut(() => AlartCoinzController(), fenix: true);
+
   }
 }
