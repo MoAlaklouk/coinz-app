@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import '../../constant/string_manager.dart';
 import 'package:get/get.dart';
 

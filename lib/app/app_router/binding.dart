@@ -1,9 +1,8 @@
-import '../../presentation/alart_coinz/alart_coinz_controller.dart';
-import '../../presentation/news/news_controller.dart';
-import '../../presentation/news_details/news_details_screen.dart';
 import 'package:get/get.dart';
 
+import '../../presentation/alart_coinz/alart_coinz_controller.dart';
 import '../../presentation/layout/layout_controller.dart';
+import '../../presentation/news/news_controller.dart';
 import '../../presentation/splash/splash_controller.dart';
 
 class Binding extends Bindings {

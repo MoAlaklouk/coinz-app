@@ -1,14 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+
 import '../constant/color_manger.dart';
 import '../constant/string_manager.dart';
-import 'package:flutter/services.dart';
-import 'package:intl/date_symbol_data_file.dart';
-
-import 'app_router/app_router.dart';
 import '../constant/theme_manager.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'app_router/app_router.dart';
 import 'app_router/binding.dart';
 
 class MyApp extends StatelessWidget {

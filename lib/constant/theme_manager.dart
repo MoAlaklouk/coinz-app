@@ -1,9 +1,7 @@
-import 'package:flutter/services.dart';
-
-import 'color_manger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'color_manger.dart';
 import 'fonts_manager.dart';
 import 'style_manager.dart';
 import 'value_manager.dart';

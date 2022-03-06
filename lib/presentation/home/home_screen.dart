@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 
 import '../../constant/assets_manager.dart';
 import '../../constant/color_manger.dart';
