@@ -61,7 +61,7 @@ class NewsScreen extends StatelessWidget {
 
   Widget newsItem() => InkWell(
         onTap: () {
-          Get.toNamed(Routes.newsDetails);
+          Get.toNamed(Routes.newsDetailsRoute);
         },
         child: Container(
           height: 107.h,
@@ -127,18 +127,16 @@ class NewsScreen extends StatelessWidget {
         ),
       );
 
-  Widget lodeMore(NewsController controller) => Container(
-        child: LoadMore(
-          isFinish: controller.count >= 60,
-          onLoadMore: controller.loadMore,
-          child: listNews(controller),
-          whenEmptyLoad: false,
-          textBuilder: (status) {
-            if (status == LoadMoreStatus.nomore)
-              return AppString.endLoading;
-            else
-              return AppString.isLoading;
-          },
-        ),
+  Widget lodeMore(NewsController controller) => LoadMore(
+        isFinish: controller.count >= 60,
+        onLoadMore: controller.loadMore,
+        child: listNews(controller),
+        whenEmptyLoad: false,
+        textBuilder: (status) {
+          if (status == LoadMoreStatus.nomore)
+            return AppString.endLoading;
+          else
+            return AppString.isLoading;
+        },
       );
 }

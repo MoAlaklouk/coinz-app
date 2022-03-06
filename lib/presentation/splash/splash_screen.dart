@@ -83,13 +83,20 @@ Widget backGround() => Column(
         ),
       ],
     );
-Widget iconBackGround() => Container(
-      child: SvgPicture.asset(AssetsManager.boxSplash),
-    );
-Widget textSplash(context) => Container(
-      child: Text(
-        AppString.splashText,
-        style: getSemiBoldStyle(
-            color: ColorManager.white, fontSize: FontSize.s25.sp),
-      ),
+Widget iconBackGround() => SvgPicture.asset(AssetsManager.boxSplash);
+Widget textSplash(context) => Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          
+          AppString.blocText,
+          style: getSemiBoldStyle(
+              color: ColorManager.white, fontSize: FontSize.s25.sp,),
+        ),
+        Text(
+          AppString.chainText,
+          style: getSemiBoldStyle(
+              color: ColorManager.white, fontSize: FontSize.s25.sp),
+        ),
+      ],
     );

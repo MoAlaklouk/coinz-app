@@ -2,7 +2,9 @@ class AppString {
   static const lang = 'ar';
 
   //splash Screen
-  static const String splashText = 'بلوك\n تشين';
+  static const String blocText = 'بلوك';
+  static const String chainText = 'تشين';
+
 
   //layput Screen
   static const String homeBottmNavTitel = 'اسعار العملات';

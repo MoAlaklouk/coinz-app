@@ -1,3 +1,5 @@
+import 'package:coinz_app/presentation/coinz_item/coinz_item_screen.dart';
+
 import '../../presentation/news_details/news_details_screen.dart';
 import '../../constant/value_manager.dart';
 import '../../presentation/layout/layout_screen.dart';
@@ -7,7 +9,8 @@ import 'package:get/get.dart';
 class Routes {
   static const String splashRoute = '/';
   static const String layoutRoute = '/layout';
-  static const String newsDetails = '/newsDetails';
+  static const String newsDetailsRoute = '/newsDetails';
+  static const String coinzItemRoute = '/coinzItem';
 }
 
 List<GetPage<dynamic>> appRoutes = [
@@ -24,8 +27,14 @@ List<GetPage<dynamic>> appRoutes = [
     transitionDuration: Duration(seconds: AppDuration.d1),
   ),
   GetPage(
-    name: Routes.newsDetails,
+    name: Routes.newsDetailsRoute,
     page: () => const NewsDetailsScreen(),
+    transition: Transition.fade,
+    transitionDuration: Duration(seconds: AppDuration.d1),
+  ),
+  GetPage(
+    name: Routes.coinzItemRoute,
+    page: () => const CoinzItemScreen(),
     transition: Transition.fade,
     transitionDuration: Duration(seconds: AppDuration.d1),
   ),

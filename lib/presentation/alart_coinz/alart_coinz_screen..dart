@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_widget_cache.dart';
 
 class AlartScreen extends StatelessWidget {
   AlartScreen({Key? key}) : super(key: key);
@@ -226,14 +225,12 @@ class AlartScreen extends StatelessWidget {
             )),
       );
 
-  Widget listOfAlart() => Container(
-        child: ListView.separated(
-            itemBuilder: (context, index) => alartItem(),
-            separatorBuilder: (context, index) => SizedBox(
-                  height: AppHeightSize.sh12,
-                ),
-            itemCount: 2),
-      );
+  Widget listOfAlart() => ListView.separated(
+      itemBuilder: (context, index) => alartItem(),
+      separatorBuilder: (context, index) => SizedBox(
+            height: AppHeightSize.sh12,
+          ),
+      itemCount: 2);
 
   Widget alartItem() => Container(
         height: AppHeightSize.sh56,

@@ -8,5 +8,5 @@ String dateFormat(DateTime value) {
 String dateFormat2(DateTime value) {
   initializeDateFormatting();
   var format = DateFormat.yMMMMd('ar');
-  return format.format(value);
+  return format.format(value);  
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:coinz_app/constant/value_manager.dart';
 import '../../app/app_router/app_router.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +13,7 @@ class SplashController extends GetxController {
 
   Timer? _timer;
   startDelay() {
-    _timer = Timer(Duration(seconds: 2), _goNext);
+    _timer = Timer(Duration(seconds: AppDuration.d1), _goNext);
   }
 
   _goNext() {

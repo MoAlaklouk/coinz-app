@@ -6,7 +6,9 @@ class NewsController extends GetxController {
     list.addAll(List.generate(10, (v) => v));
   }
 
-  int get count => list.length;
+  int get count {
+    return list.length;
+  }
 
   List<int> list = [];
 
@@ -18,11 +20,19 @@ class NewsController extends GetxController {
     update();
   }
 
+  
+
   Future<bool> loadMore() async {
     print("onLoadMore");
-    await Future.delayed(Duration(seconds:0, milliseconds: 2000));
+    await Future.delayed(const Duration(seconds: 0, milliseconds: 2000));
     load();
+
     return true;
   }
 
+  @override
+  Future<void> refresh() async {
+    print("refresh");
+    await Future.delayed(const Duration(seconds: 0, milliseconds: 2000));
+  }
 }
