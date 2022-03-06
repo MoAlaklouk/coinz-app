@@ -1,4 +1,5 @@
-import 'package:coinz_app/constant/color_manger.dart';
+import '../constant/color_manger.dart';
+import '../constant/string_manager.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_file.dart';
 
@@ -21,9 +22,8 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       minTextAdapt: true,
       builder: () {
-    
         return GetMaterialApp(
-          locale: const Locale('ar'),
+          locale: const Locale(AppString.lang),
           debugShowCheckedModeBanner: false,
           initialBinding: Binding(),
           getPages: appRoutes,

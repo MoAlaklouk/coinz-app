@@ -1,11 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+
 import '../../constant/assets_manager.dart';
 import '../../constant/string_manager.dart';
 import '../alart_coinz/alart_coinz_screen..dart';
 import '../home/home_screen.dart';
 import '../news/news_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 
 class LayoutController extends GetxController {
   int currantPageIndex = 0;

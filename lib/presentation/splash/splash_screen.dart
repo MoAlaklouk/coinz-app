@@ -1,8 +1,7 @@
-import 'package:coinz_app/constant/color_manger.dart';
-import 'package:coinz_app/constant/fonts_manager.dart';
-import 'package:coinz_app/constant/style_manager.dart';
+import '../../constant/color_manger.dart';
+import '../../constant/fonts_manager.dart';
+import '../../constant/style_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../constant/assets_manager.dart';
 import '../../constant/string_manager.dart';
 import 'splash_controller.dart';

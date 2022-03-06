@@ -1,11 +1,11 @@
-import 'package:coinz_app/constant/assets_manager.dart';
-import 'package:coinz_app/constant/color_manger.dart';
-import 'package:coinz_app/constant/fonts_manager.dart';
-import 'package:coinz_app/constant/helper.dart';
-import 'package:coinz_app/constant/icon_manager.dart';
-import 'package:coinz_app/constant/string_manager.dart';
-import 'package:coinz_app/constant/style_manager.dart';
-import 'package:coinz_app/constant/value_manager.dart';
+import '../../constant/assets_manager.dart';
+import '../../constant/color_manger.dart';
+import '../../constant/fonts_manager.dart';
+import '../../constant/helper.dart';
+import '../../constant/icon_manager.dart';
+import '../../constant/string_manager.dart';
+import '../../constant/style_manager.dart';
+import '../../constant/value_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,7 +21,8 @@ class NewsDetailsScreen extends StatelessWidget {
             onPressed: () {},
             child: Text(
               AppString.shareString,
-              style: getRegularStyle(color: ColorManager.black,fontSize: FontSize.s14.sp),
+              style: getMediumStyle(
+                  color: ColorManager.black, fontSize: FontSize.s14.sp),
             ),
           )
         ],
@@ -31,7 +32,7 @@ class NewsDetailsScreen extends StatelessWidget {
         child: Column(
           children: [
             titelNewsDetails(),
-            captionNewsDetails(),
+            dateNews(),
             SizedBox(
               height: AppHeightSize.sh11,
             ),
@@ -58,7 +59,9 @@ class NewsDetailsScreen extends StatelessWidget {
               color: ColorManager.black, fontSize: FontSize.s20),
         ),
       );
-  Widget captionNewsDetails() => Container(
+  Widget dateNews() => Container(
+        margin: EdgeInsets.symmetric(horizontal: AppMargin.m27),
+        alignment: Alignment.centerRight,
         child: Text(
           dateFormat2(DateTime.now()),
           style: getSemiBoldStyle(
@@ -75,6 +78,7 @@ class NewsDetailsScreen extends StatelessWidget {
       );
 
   Widget socialMediaButton() => Container(
+        margin: EdgeInsets.symmetric(horizontal: AppMargin.m27),
         height: AppHeightSize.sh28,
         child: Row(
           children: [
@@ -125,6 +129,7 @@ class NewsDetailsScreen extends StatelessWidget {
         ),
       );
   Widget newsBodyText() => Container(
+        margin: EdgeInsets.symmetric(horizontal: AppMargin.m27),
         child: Text(
           AppString.newsBodyText,
           style: getRegularStyle(

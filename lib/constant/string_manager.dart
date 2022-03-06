@@ -1,4 +1,6 @@
 class AppString {
+  static const lang = 'ar';
+
   //splash Screen
   static const String splashText = 'بلوك\n تشين';
 
@@ -45,10 +47,8 @@ class AppString {
 
   static const String shareString = 'مشاركة';
   static const String pressToAddNew = 'اضغط للاضافة';
-  static const choosenItem = 'يساوي';
+  static const equalString = 'يساوي';
   static const chooseItem = ['اكبر من', 'اصغر من', 'يساوي'];
   static const isLoading = 'جاري تحميل المزيد';
   static const endLoading = 'لايوجد المزيد';
-
-
 }

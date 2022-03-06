@@ -1,6 +1,4 @@
-import 'package:coinz_app/presentation/news/news_screen.dart';
-import 'package:coinz_app/presentation/news_details/news_details_screen.dart';
-
+import '../../presentation/news_details/news_details_screen.dart';
 import '../../constant/value_manager.dart';
 import '../../presentation/layout/layout_screen.dart';
 import '../../presentation/splash/splash_screen.dart';
@@ -13,7 +11,12 @@ class Routes {
 }
 
 List<GetPage<dynamic>> appRoutes = [
-  GetPage(name: Routes.splashRoute, page: () => SplashScreen()),
+  GetPage(
+    name: Routes.splashRoute,
+    page: () => const SplashScreen(),
+    transition: Transition.fade,
+    transitionDuration: Duration(seconds: AppDuration.d1),
+  ),
   GetPage(
     name: Routes.layoutRoute,
     page: () => const LayoutScreen(),

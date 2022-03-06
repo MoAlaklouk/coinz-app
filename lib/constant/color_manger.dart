@@ -14,16 +14,13 @@ class ColorManager {
   static Color facebookBlue = HexColor.fromHex("#2D609B");
   static Color twitterBlue = HexColor.fromHex("#00C3F3");
 
-
   static Color whatsUpGreen = HexColor.fromHex("#80CE13");
   static Color green = HexColor.fromHex("#38AD65");
   static Color black = HexColor.fromHex("#000000");
 
   static Color error = HexColor.fromHex("#e61f34"); // red color
- 
-}
 
-//Or
+}
 
 extension HexColor on Color {
   static Color fromHex(String hexColorString) {
