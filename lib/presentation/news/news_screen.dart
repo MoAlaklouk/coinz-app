@@ -13,8 +13,8 @@ import 'package:get/get.dart';
 import 'package:loadmore/loadmore.dart';
 
 class NewsScreen extends StatelessWidget {
-  const NewsScreen({Key? key}) : super(key: key);
-
+  NewsScreen({Key? key}) : super(key: key);
+  NewsController newsController = Get.find();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<NewsController>(
@@ -50,14 +50,15 @@ class NewsScreen extends StatelessWidget {
         ),
       );
 
-  Widget listNews(NewsController controller) => ListView.separated(
-        itemBuilder: (context, index) => newsItem(),
-        separatorBuilder: (context, index) => SizedBox(
-          height: AppHeightSize.sh10,
-        ),
-        itemCount: controller.count,
-        physics: BouncingScrollPhysics(),
-      );
+  Widget listNews(NewsController controller) {
+    return ListView.separated(
+      itemBuilder: (context, index) => newsItem(),
+      separatorBuilder: (context, index) => SizedBox(
+        height: AppHeightSize.sh10,
+      ),
+      itemCount: controller.count,
+    );
+  }
 
   Widget newsItem() => InkWell(
         onTap: () {
@@ -127,16 +128,19 @@ class NewsScreen extends StatelessWidget {
         ),
       );
 
-  Widget lodeMore(NewsController controller) => LoadMore(
-        isFinish: controller.count >= 60,
-        onLoadMore: controller.loadMore,
-        child: listNews(controller),
-        whenEmptyLoad: false,
-        textBuilder: (status) {
-          if (status == LoadMoreStatus.nomore)
-            return AppString.endLoading;
-          else
-            return AppString.isLoading;
-        },
+  Widget lodeMore(NewsController controller) => RefreshIndicator(
+        onRefresh: () => controller.refreshing(),
+        child: LoadMore(
+          whenEmptyLoad: false,
+          isFinish: controller.count >= 30,
+          onLoadMore: () => controller.loadMore(),
+          child: listNews(controller),
+          textBuilder: (status) {
+            if (status == LoadMoreStatus.nomore)
+              return AppString.endLoading;
+            else
+              return AppString.isLoading;
+          },
+        ),
       );
 }

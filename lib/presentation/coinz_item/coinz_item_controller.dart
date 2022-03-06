@@ -13,7 +13,7 @@ class CoinzItemController extends GetxController {
   void load() {
     print("load");
 
-    listOfCoinzItem.addAll(List.generate(10, (v) => v));
+    listOfCoinzItem.addAll(List.generate(15, (v) => v));
     print("data count = ${listOfCoinzItem.length}");
     update();
   }
@@ -23,5 +23,12 @@ class CoinzItemController extends GetxController {
     await Future.delayed(Duration(seconds: 0, milliseconds: 2000));
     load();
     return true;
+  }
+
+  Future<void> refreshing() async {
+    print("refresh");
+    await Future.delayed(const Duration(seconds: 0, milliseconds: 2000));
+    listOfCoinzItem.clear();
+    load();
   }
 }

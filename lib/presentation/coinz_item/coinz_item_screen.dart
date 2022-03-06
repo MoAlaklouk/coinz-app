@@ -36,16 +36,19 @@ class CoinzItemScreen extends StatelessWidget {
           ),
       itemCount: controller.count);
 
-  Widget lodeMore(CoinzItemController controller) => LoadMore(
-        isFinish: controller.count >= 60,
-        onLoadMore: controller.loadMore,
-        child: listOfCoinzItem(controller),
-        whenEmptyLoad: false,
-        textBuilder: (status) {
-          if (status == LoadMoreStatus.nomore)
-            return AppString.endLoading;
-          else
-            return AppString.isLoading;
-        },
+  Widget lodeMore(CoinzItemController controller) => RefreshIndicator(
+        onRefresh: () => controller.refreshing(),
+        child: LoadMore(
+          isFinish: controller.count >= 60,
+          onLoadMore: () => controller.loadMore(),
+          child: listOfCoinzItem(controller),
+          whenEmptyLoad: false,
+          textBuilder: (status) {
+            if (status == LoadMoreStatus.nomore)
+              return AppString.endLoading;
+            else
+              return AppString.isLoading;
+          },
+        ),
       );
 }

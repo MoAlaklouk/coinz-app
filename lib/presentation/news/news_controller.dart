@@ -14,25 +14,23 @@ class NewsController extends GetxController {
 
   void load() {
     print("load");
-
     list.addAll(List.generate(10, (v) => v));
     print("data count = ${list.length}");
     update();
   }
 
-  
-
   Future<bool> loadMore() async {
     print("onLoadMore");
     await Future.delayed(const Duration(seconds: 0, milliseconds: 2000));
     load();
-
     return true;
   }
 
-  @override
-  Future<void> refresh() async {
+  
+  Future<void> refreshing() async {
     print("refresh");
     await Future.delayed(const Duration(seconds: 0, milliseconds: 2000));
+    list.clear();
+    load();
   }
 }
