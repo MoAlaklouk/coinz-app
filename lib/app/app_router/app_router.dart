@@ -34,7 +34,7 @@ List<GetPage<dynamic>> appRoutes = [
   ),
   GetPage(
     name: Routes.coinzItemRoute,
-    page: () => const CoinzItemScreen(),
+    page: () =>  CoinzItemScreen(),
     transition: Transition.fade,
     transitionDuration: Duration(seconds: AppDuration.d1),
   ),

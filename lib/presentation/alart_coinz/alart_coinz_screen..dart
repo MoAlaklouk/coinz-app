@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:coinz_app/constant/enums.dart';
 
 import '../../constant/assets_manager.dart';
 import '../../constant/color_manger.dart';
@@ -151,17 +154,20 @@ class AlartScreen extends StatelessWidget {
                     left: BorderSide(color: ColorManager.lightGreyBorder))),
             alignment: Alignment.center,
             child: DropdownButton(
+            value: controller.dropdownValue,
               underline: Container(),
-              items: AppString.chooseItem
+              items: AlartValue.values
                   .map((e) => DropdownMenuItem(
-                      value: e,
+                      value: alartValue(e),
                       child: Text(
-                        '$e',
+                        '${alartValue(e)}',
                         style: getMediumStyle(color: ColorManager.black),
                       )))
                   .toList(),
-              onChanged: (value) => controller.changeDropdownItem(value),
-              value: controller.dropdownValue,
+              onChanged: (value) {
+                print(value);
+                controller.changeDropdownItem(value);
+              },
             ),
           )),
           Expanded(
@@ -192,6 +198,7 @@ class AlartScreen extends StatelessWidget {
                     controller: alartValueController,
                     keyboardType: TextInputType.number,
                     style: TextStyle(color: ColorManager.black),
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 Expanded(child: Text(AppString.dollarSign)),

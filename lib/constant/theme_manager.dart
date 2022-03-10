@@ -74,11 +74,7 @@ ThemeData getApplicationTheme() {
     ),
 
     inputDecorationTheme: InputDecorationTheme(
-        contentPadding: EdgeInsets.all(AppPadding.p1_5),
-        hintStyle: getRegularStyle(color: ColorManager.grey1, fontSize: 12.sp),
-        labelStyle:
-            getMediumStyle(color: ColorManager.darkGrey, fontSize: 12.sp),
-        errorStyle: getRegularStyle(color: ColorManager.error),
+        
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: ColorManager.lightGreyBorder,

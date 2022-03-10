@@ -7,8 +7,8 @@ import 'package:get/get.dart';
 import 'package:loadmore/loadmore.dart';
 
 class CoinzItemScreen extends StatelessWidget {
-  const CoinzItemScreen({Key? key}) : super(key: key);
-
+   CoinzItemScreen({Key? key}) : super(key: key);
+  CoinzItemController coinzItemController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 
 import '../constant/color_manger.dart';
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
           initialBinding: Binding(),
           getPages: appRoutes,
           theme: getApplicationTheme(),
+          builder: (context, child) {
+            return FlutterSmartDialog(child: child);
+          },
         );
       },
     );
