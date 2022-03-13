@@ -179,7 +179,7 @@ class HomeScreen extends StatelessWidget {
         delegate: SliverChildBuilderDelegate(
           ((BuildContext context, int index) =>
               coinzListItem(index, controller)),
-          childCount: 15,
+          childCount: 17,
         ),
       );
       

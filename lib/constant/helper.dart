@@ -12,4 +12,4 @@ String dateFormat2(DateTime value) {
 }
 
 int pageNum = 1;
-int pageCount = 15;
+int pageCount = 20;

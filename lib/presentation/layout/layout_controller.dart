@@ -60,7 +60,6 @@ class LayoutController extends GetxController {
   }
 
   CurrenciesModel? currenciesModel;
-  List currencies = [];
 
   void getCurrencies({
     required int page_count,
@@ -68,7 +67,7 @@ class LayoutController extends GetxController {
   }) {
     islaod = false;
     ApiRequest(
-      path: currencies_list,
+      path: CURRENCIES,
       method: getMethod,
       queryParameters: {
         'i_page_count': page_count,
@@ -77,7 +76,7 @@ class LayoutController extends GetxController {
     ).request(
       onSuccess: (data, response) {
         currenciesModel = CurrenciesModel.fromJson(response);
-        currencies = currenciesModel!.currencies!;
+       
         islaod = true;
         update();
       },

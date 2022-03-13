@@ -45,22 +45,23 @@ class CoinzItemScreen extends StatelessWidget {
           ),
       itemCount: controller.count);
 
-  Widget lodeMore(CoinzItemController controller) => RefreshIndicator(
+  Widget  lodeMore(CoinzItemController controller) => RefreshIndicator(
         onRefresh: () => controller.refreshing(),
         child: LoadMore(
-          isFinish: controller.count >= 60,
+          isFinish: controller.count >= 100,
           onLoadMore: () => controller.loadMore(),
           child: listOfCoinzItem(controller),
           whenEmptyLoad: false,
           textBuilder: (status) {
-            if (status == LoadMoreStatus.nomore)
+            if (status == LoadMoreStatus.nomore) {
               return AppString.endLoading;
-            else
+            } else {
               return AppString.isLoading;
+            }
           },
         ),
       );
-  Widget coinzListItem(index,  controller) => Container(
+  Widget coinzListItem(index, CoinzItemController  controller) => Container(
         margin: EdgeInsets.symmetric(horizontal: AppMargin.m4),
         height: AppHeightSize.sh35,
         child: Row(
