@@ -1,3 +1,6 @@
+import 'package:coinz_app/data/model/coinz_model.dart';
+import 'package:coinz_app/data/network/remote/api.dart';
+import 'package:coinz_app/data/network/remote/methods.dart';
 import 'package:get/get.dart';
 
 import '../data/network/api_key.dart';
@@ -41,4 +44,6 @@ class MyAppController extends GetxController {
 
     update();
   }
+
+ 
 }

@@ -1,3 +1,4 @@
+import 'package:coinz_app/data/network/remote/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,14 +11,17 @@ class LayoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: GetBuilder<LayoutController>(
-        builder: (controller) => Scaffold(
-          bottomNavigationBar: BottomNavigationBar(
-            items: controller.bottomNavIcon,
-            onTap: (value) =>
-                controller.changeBottomNavigationBar(value, context),
-            currentIndex: controller.currantPageIndex,
+        builder: (controller) => MyBuildCondition(
+          condition: controller.islaod,
+          builder: (context) => Scaffold(
+            bottomNavigationBar: BottomNavigationBar(
+              items: controller.bottomNavIcon,
+              onTap: (value) =>
+                  controller.changeBottomNavigationBar(value, context),
+              currentIndex: controller.currantPageIndex,
+            ),
+            body: controller.secreens[controller.currantPageIndex],
           ),
-          body: controller.secreens[controller.currantPageIndex],
         ),
       ),
     );

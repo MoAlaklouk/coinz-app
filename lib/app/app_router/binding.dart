@@ -1,4 +1,5 @@
 import 'package:coinz_app/presentation/coinz_item/coinz_item_controller.dart';
+import 'package:coinz_app/presentation/home/home_controller.dart';
 import 'package:get/get.dart';
 
 import '../../presentation/alart_coinz/alart_coinz_controller.dart';
@@ -14,5 +15,7 @@ class Binding extends Bindings {
     Get.lazyPut(() => NewsController(), fenix: true);
     Get.lazyPut(() => AlartCoinzController(), fenix: true);
     Get.lazyPut(() => CoinzItemController(), fenix: true);
+    Get.lazyPut(() => HomeController(), fenix: true);
+
   }
 }

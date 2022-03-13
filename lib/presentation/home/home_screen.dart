@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:coinz_app/app/app_router/app_router.dart';
-import 'package:coinz_app/presentation/coinz_item/coinz_item_screen.dart';
+import 'package:coinz_app/data/model/coinz_model.dart';
+import 'package:coinz_app/presentation/home/home_controller.dart';
+import 'package:coinz_app/presentation/layout/layout_controller.dart';
 import 'package:get/get.dart';
 
 import '../../constant/assets_manager.dart';
@@ -18,33 +21,35 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          expandedHeight: AppHeightSize.sh280,
-          flexibleSpace: FlexibleSpaceBar(
-            background: Column(
-              children: [
-                homeTitel(),
-                SizedBox(
-                  height: AppHeightSize.sh5,
-                ),
-                lastUpdateText(),
-                SizedBox(
-                  height: AppHeightSize.sh16,
-                ),
-                Expanded(child: gridFavoriteCoinz()),
-              ],
+    return GetBuilder<HomeController>(
+      builder: (controller) => Scaffold(
+          body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: AppHeightSize.sh280,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Column(
+                children: [
+                  homeTitel(),
+                  SizedBox(
+                    height: AppHeightSize.sh5,
+                  ),
+                  lastUpdateText(),
+                  SizedBox(
+                    height: AppHeightSize.sh16,
+                  ),
+                  Expanded(child: gridFavoriteCoinz()),
+                ],
+              ),
             ),
           ),
-        ),
-        SliverToBoxAdapter(
-          child: titelBar(),
-        ),
-        coinzSliverList(),
-      ],
-    ));
+          SliverToBoxAdapter(
+            child: titelBar(),
+          ),
+          coinzSliverList(controller),
+        ],
+      )),
+    );
   }
 
   Widget homeTitel() => Container(
@@ -170,14 +175,97 @@ class HomeScreen extends StatelessWidget {
         ),
       );
 
-  Widget coinzSliverList() => SliverList(
+  Widget coinzSliverList(HomeController controller) => SliverList(
         delegate: SliverChildBuilderDelegate(
-          ((BuildContext context, int index) => coinzListItem(index)),
-          childCount: 18,
+          ((BuildContext context, int index) =>
+              coinzListItem(index, controller)),
+          childCount: 15,
         ),
       );
-}
+      
 
+
+Widget coinzListItem(index, HomeController controller) => Container(
+      margin: EdgeInsets.symmetric(horizontal: AppMargin.m4),
+      height: AppHeightSize.sh35,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    '${index + 1}',
+                    style: TextStyle(
+                        color: ColorManager.lightGrey,
+                        fontSize: FontSize.s8.sp),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: CachedNetworkImage(
+                    imageUrl: controller.getImageUrl(index),
+                    imageBuilder: (context, imageProvider) => CircleAvatar(
+                      radius: 12,
+                      backgroundImage: imageProvider,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 7,
+                  child: Text(
+                    controller.getNameCoinz(index),
+                    style: getRegularStyle(
+                        color: ColorManager.black, fontSize: FontSize.s14.sp),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(controller.getValueOfCoinz(index),
+                    style: TextStyle(
+                        color: ColorManager.black, fontSize: FontSize.s13.sp)),
+                Text(
+                  AppString.dollarSign,
+                  style: TextStyle(color: ColorManager.lightGrey),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  AssetsManager.increaseIcon,
+                  color: ColorManager.whatsUpGreen,
+                  height: AppHeightSize.sh10,
+                ),
+                SizedBox(
+                  width: AppWidthSize.sw4,
+                ),
+                Text(
+                  controller.getTradingOfCoinz(index),
+                  style: TextStyle(
+                    color: ColorManager.whatsUpGreen,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+
+}
 Widget titelBar() => Container(
       height: AppHeightSize.sh41,
       padding: EdgeInsets.symmetric(horizontal: AppPadding.p5),
@@ -205,89 +293,6 @@ Widget titelBar() => Container(
             style: TextStyle(color: ColorManager.darkGrey),
             textAlign: TextAlign.center,
           )),
-        ],
-      ),
-    );
-
-Widget coinzListItem(index) => Container(
-      margin: EdgeInsets.symmetric(horizontal: AppMargin.m4),
-      height: AppHeightSize.sh35,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            flex: 2,
-            child: Row(
-              children: [
-                Text(
-                  '${index + 1}',
-                  style: TextStyle(
-                      color: ColorManager.lightGrey, fontSize: FontSize.s8.sp),
-                ),
-                SizedBox(
-                  width: AppWidthSize.sw14,
-                ),
-                SvgPicture.asset(
-                  AssetsManager.homeCoinzIcon,
-                  color: ColorManager.black,
-                  height: AppHeightSize.sh20,
-                ),
-                SizedBox(
-                  width: AppWidthSize.sw6,
-                ),
-                Text(
-                  AppString.textfavoriteCoinz,
-                  style: getRegularStyle(
-                      color: ColorManager.black, fontSize: FontSize.s14.sp),
-                ),
-                SizedBox(
-                  width: AppWidthSize.sw4,
-                ),
-                Text(
-                  AppString.textfavoriteCoinzEn,
-                  style: getRegularStyle(
-                      color: ColorManager.black, fontSize: FontSize.s12.sp),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(AppString.price,
-                    style: TextStyle(
-                        color: ColorManager.black, fontSize: FontSize.s15.sp)),
-                Text(
-                  AppString.dollarSign,
-                  style: TextStyle(color: ColorManager.lightGrey),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  AssetsManager.increaseIcon,
-                  color: ColorManager.whatsUpGreen,
-                  height: AppHeightSize.sh10,
-                ),
-                SizedBox(
-                  width: AppWidthSize.sw4,
-                ),
-                Text(
-                  '8.19',
-                  style: TextStyle(
-                    color: ColorManager.whatsUpGreen,
-                  ),
-                ),
-              ],
-            ),
-          ),
         ],
       ),
     );

@@ -8,5 +8,8 @@ String dateFormat(DateTime value) {
 String dateFormat2(DateTime value) {
   initializeDateFormatting();
   var format = DateFormat.yMMMMd('ar');
-  return format.format(value);  
+  return format.format(value);
 }
+
+int pageNum = 1;
+int pageCount = 15;

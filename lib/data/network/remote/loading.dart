@@ -5,13 +5,11 @@ import '../../../constant/color_manger.dart';
 /// start loading spinner
 startLoading() {
   SmartDialog.showLoading(
-   
     background: ColorManager.white,
     widget: const CircularProgressIndicator(
       strokeWidth: 5,
       valueColor: AlwaysStoppedAnimation(Colors.orange),
     ),
-   
   );
 }
 
@@ -28,9 +26,8 @@ class MyBuildCondition extends StatelessWidget {
   final WidgetBuilder? builder;
 
   /// Run if [condition] is false and it is not null.
-  Widget fallback = const Center(
-    child: CircularProgressIndicator(),
-  );
+  Widget fallback =
+      const Scaffold(body: Center(child: CircularProgressIndicator()));
 
   MyBuildCondition({
     Key? key,
