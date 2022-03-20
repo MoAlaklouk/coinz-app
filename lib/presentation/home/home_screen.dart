@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:coinz_app/app/app_router/app_router.dart';
 import 'package:coinz_app/data/model/coinz_model.dart';
+import 'package:coinz_app/data/network/remote/loading.dart';
 import 'package:coinz_app/presentation/home/home_controller.dart';
 import 'package:coinz_app/presentation/layout/layout_controller.dart';
 import 'package:get/get.dart';
@@ -17,38 +18,45 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
+  HomeScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      builder: (controller) => Scaffold(
-          body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            expandedHeight: AppHeightSize.sh280,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Column(
-                children: [
-                  homeTitel(),
-                  SizedBox(
-                    height: AppHeightSize.sh5,
+      builder: (controller) {
+        return Scaffold(
+            body: MyBuildCondition(
+          condition: controller.islaod,
+          builder: (context) => CustomScrollView(
+            slivers: <Widget>[
+              SliverAppBar(
+                expandedHeight:
+                    controller.favouritesModel!.favourites!.length < 2
+                        ? AppHeightSize.sh180
+                        : AppHeightSize.sh280,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Column(
+                    children: [
+                      homeTitel(),
+                      SizedBox(
+                        height: AppHeightSize.sh5,
+                      ),
+                      lastUpdateText(),
+                      SizedBox(
+                        height: AppHeightSize.sh16,
+                      ),
+                      Expanded(child: gridFavoriteCoinz(controller)),
+                    ],
                   ),
-                  lastUpdateText(),
-                  SizedBox(
-                    height: AppHeightSize.sh16,
-                  ),
-                  Expanded(child: gridFavoriteCoinz()),
-                ],
+                ),
               ),
-            ),
+              SliverToBoxAdapter(
+                child: titelBar(),
+              ),
+              coinzSliverList(controller),
+            ],
           ),
-          SliverToBoxAdapter(
-            child: titelBar(),
-          ),
-          coinzSliverList(controller),
-        ],
-      )),
+        ));
+      },
     );
   }
 
@@ -77,25 +85,35 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       );
+  Widget gridFavoriteCoinz(HomeController controller) {
+    List<Widget> favorite = [];
 
-  Widget gridFavoriteCoinz() => GridView.count(
+    return GridView.count(
         childAspectRatio: 1.61,
         crossAxisCount: 2,
         crossAxisSpacing: AppSize.s10,
         mainAxisSpacing: AppSize.s9,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: AppPadding.p23),
-        children: [
-          favoriteCoinzItem(),
-          favoriteCoinzItem(),
-          favoriteCoinzItem(),
-          newFavoriteCoinzIteme(() {
-            Get.toNamed(Routes.coinzItemRoute);
-          }),
-        ],
-      );
+        children: List.generate(
+          controller.favouritesModel!.favourites!.length + 1,
+          (index) {
+            if (controller.favouritesModel!.favourites!.length == index &&
+                4 > index) {
+              favorite.add(newFavoriteCoinzIteme(controller));
+            } else {
+              if (4 > index) {
+                favorite.add(favoriteCoinzItem(controller, index));
+              } else {
+                return Container();
+              }
+            }
+            return favorite[index];
+          },
+        ));
+  }
 
-  Widget favoriteCoinzItem() => Container(
+  Widget favoriteCoinzItem(HomeController controller, index) => Container(
         clipBehavior: Clip.antiAliasWithSaveLayer,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSize.s8),
@@ -107,10 +125,14 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              AssetsManager.homeCoinzIcon,
-              fit: BoxFit.contain,
-              height: AppHeightSize.sh25,
+            CachedNetworkImage(
+              imageUrl: controller.getImageUrl(index),
+              imageBuilder: (context, imageProvider) => Container(
+                  height: AppHeightSize.sh25,
+                  child: Image(image: imageProvider)),
+              errorWidget: (context, url, error) => CircleAvatar(
+                backgroundColor: ColorManager.lightGreyBorder,
+              ),
             ),
             SizedBox(
               height: AppHeightSize.sh8,
@@ -119,23 +141,16 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  AppString.textfavoriteCoinz,
+                  controller.getNameCoinz(index),
                   style: getMediumStyle(
                       color: ColorManager.white, fontSize: FontSize.s14.sp),
-                ),
-                SizedBox(
-                  width: AppWidthSize.sw1,
-                ),
-                Text(
-                  AppString.textfavoriteCoinzEn,
-                  style: getMediumStyle(color: ColorManager.white),
                 ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(AppString.price,
+                Text(controller.getValueOfCoinz(index),
                     style: TextStyle(
                         color: ColorManager.white, fontSize: FontSize.s12.sp)),
                 Text(
@@ -148,14 +163,17 @@ class HomeScreen extends StatelessWidget {
         ),
       );
 
-  Widget newFavoriteCoinzIteme(Function function) => Container(
+  Widget newFavoriteCoinzIteme(controller) => Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSize.s8),
           color: ColorManager.lightGreyBorder,
         ),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: MaterialButton(
-          onPressed: () => function(),
+          onPressed: () {
+            print(controller.favouritesModel!.favourites!.length);
+            Get.toNamed(Routes.coinzItemRoute);
+          },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -182,90 +200,93 @@ class HomeScreen extends StatelessWidget {
           childCount: 17,
         ),
       );
-      
 
-
-Widget coinzListItem(index, HomeController controller) => Container(
-      margin: EdgeInsets.symmetric(horizontal: AppMargin.m4),
-      height: AppHeightSize.sh35,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            flex: 2,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    '${index + 1}',
-                    style: TextStyle(
-                        color: ColorManager.lightGrey,
-                        fontSize: FontSize.s8.sp),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: CachedNetworkImage(
-                    imageUrl: controller.getImageUrl(index),
-                    imageBuilder: (context, imageProvider) => CircleAvatar(
-                      radius: 12,
-                      backgroundImage: imageProvider,
+  Widget coinzListItem(index, HomeController controller) => Container(
+        margin: EdgeInsets.symmetric(horizontal: AppMargin.m4),
+        height: AppHeightSize.sh35,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              flex: 2,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      '${index + 1}',
+                      style: TextStyle(
+                          color: ColorManager.lightGrey,
+                          fontSize: FontSize.s8.sp),
                     ),
                   ),
-                ),
-                Expanded(
-                  flex: 7,
-                  child: Text(
-                    controller.getNameCoinz(index),
-                    style: getRegularStyle(
-                        color: ColorManager.black, fontSize: FontSize.s14.sp),
+                  Expanded(
+                    flex: 2,
+                    child: CachedNetworkImage(
+                      imageUrl: controller.getImageUrl(index),
+                      imageBuilder: (context, imageProvider) =>
+                          Image(image: imageProvider),
+                      errorWidget: (context, url, error) => CircleAvatar(
+                        backgroundColor: ColorManager.lightGreyBorder,
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: AppWidthSize.sw14,
+                  ),
+                  Expanded(
+                    flex: 7,
+                    child: Text(
+                      controller.getNameCoinz(index),
+                      style: getRegularStyle(
+                          color: ColorManager.black, fontSize: FontSize.s14.sp),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(controller.getValueOfCoinz(index),
-                    style: TextStyle(
-                        color: ColorManager.black, fontSize: FontSize.s13.sp)),
-                Text(
-                  AppString.dollarSign,
-                  style: TextStyle(color: ColorManager.lightGrey),
-                ),
-              ],
+            Expanded(
+              flex: 2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(controller.getValueOfCoinz(index),
+                      style: TextStyle(
+                          color: ColorManager.black,
+                          fontSize: FontSize.s13.sp)),
+                  Text(
+                    AppString.dollarSign,
+                    style: TextStyle(color: ColorManager.lightGrey),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  AssetsManager.increaseIcon,
-                  color: ColorManager.whatsUpGreen,
-                  height: AppHeightSize.sh10,
-                ),
-                SizedBox(
-                  width: AppWidthSize.sw4,
-                ),
-                Text(
-                  controller.getTradingOfCoinz(index),
-                  style: TextStyle(
+            Expanded(
+              flex: 1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    AssetsManager.increaseIcon,
                     color: ColorManager.whatsUpGreen,
+                    height: AppHeightSize.sh10,
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: AppWidthSize.sw4,
+                  ),
+                  Text(
+                    controller.getTradingOfCoinz(index),
+                    style: TextStyle(
+                      color: ColorManager.whatsUpGreen,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-    );
-
+          ],
+        ),
+      );
 }
+
 Widget titelBar() => Container(
       height: AppHeightSize.sh41,
       padding: EdgeInsets.symmetric(horizontal: AppPadding.p5),

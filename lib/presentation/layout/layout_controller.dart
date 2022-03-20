@@ -2,7 +2,6 @@ import 'package:coinz_app/constant/helper.dart';
 import 'package:coinz_app/data/model/coinz_model.dart';
 import 'package:coinz_app/data/network/api_key.dart';
 import 'package:coinz_app/data/network/remote/api.dart';
-import 'package:coinz_app/data/network/remote/loading.dart';
 import 'package:coinz_app/data/network/remote/methods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -60,7 +59,7 @@ class LayoutController extends GetxController {
   }
 
   CurrenciesModel? currenciesModel;
-
+  List<Currencies>? currenciesItem = [];
   void getCurrencies({
     required int page_count,
     required int page_number,
@@ -75,8 +74,13 @@ class LayoutController extends GetxController {
       },
     ).request(
       onSuccess: (data, response) {
+        pageNum++;
+
         currenciesModel = CurrenciesModel.fromJson(response);
-       
+        currenciesItem!.addAll(List.generate(
+          page_count,
+          (index) => currenciesModel!.currencies![index],
+        ));
         islaod = true;
         update();
       },

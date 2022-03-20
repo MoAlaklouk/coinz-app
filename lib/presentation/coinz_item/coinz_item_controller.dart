@@ -1,14 +1,15 @@
 import 'package:coinz_app/constant/helper.dart';
 import 'package:coinz_app/data/model/coinz_model.dart';
+import 'package:coinz_app/data/network/api_key.dart';
+import 'package:coinz_app/data/network/remote/api.dart';
+import 'package:coinz_app/data/network/remote/methods.dart';
 import 'package:coinz_app/presentation/layout/layout_controller.dart';
 import 'package:get/get.dart';
 
 class CoinzItemController extends GetxController {
   void onInit() {
     super.onInit();
-    listOfCoinzItem.addAll(List.generate(
-        pageCount, (v) => _layoutController.currenciesModel!.currencies![v]));
-    pageNum = 1;
+    load();
   }
 
   final LayoutController _layoutController = LayoutController.instance;
@@ -19,14 +20,17 @@ class CoinzItemController extends GetxController {
 
   void load() {
     print("load");
+
     _layoutController.getCurrencies(
         page_count: pageCount, page_number: pageNum);
+
     listOfCoinzItem.addAll(
-      List.generate(
-          pageCount, (v) => _layoutController.currenciesModel!.currencies![v]),
+      List.generate(pageCount, (v) => _layoutController.currenciesItem![v]),
     );
 
-    print("data count = ${listOfCoinzItem.length}");
+    print("data count = ${_layoutController.currenciesItem!.length}");
+
+    print("data count2 = $count");
 
     update();
   }
@@ -34,7 +38,8 @@ class CoinzItemController extends GetxController {
   Future<bool> loadMore() async {
     print("onLoadMore");
 
-    ++pageNum;
+    print("$pageNum");
+
     await Future.delayed(Duration(seconds: 0, milliseconds: 700));
     load();
 
@@ -52,19 +57,44 @@ class CoinzItemController extends GetxController {
   }
 
   String getNameCoinz(int index) {
-    int indexOfSubString = listOfCoinzItem[index].sName!.indexOf('(');
-    return listOfCoinzItem[index].sName!.substring(0, indexOfSubString);
+    int indexOfSubString =
+        _layoutController.currenciesItem![index].sName!.indexOf('(');
+    return _layoutController.currenciesItem![index].sName!
+        .substring(0, indexOfSubString);
   }
 
   String getImageUrl(int index) {
-    return listOfCoinzItem[index].sIcon!;
+    return _layoutController.currenciesItem![index].sIcon!;
   }
 
   String getValueOfCoinz(int index) {
-    return listOfCoinzItem[index].dValue!;
+    var length = _layoutController.currenciesItem![index].dValue!.length;
+    int indexOfSubString =
+        _layoutController.currenciesItem![index].dValue!.indexOf('.');
+    if (length > indexOfSubString + 2) {
+      return _layoutController.currenciesItem![index].dValue!
+          .substring(0, indexOfSubString + 3);
+    } else {
+      return _layoutController.currenciesItem![index].dValue!;
+    }
   }
 
   String getTradingOfCoinz(int index) {
-    return listOfCoinzItem[index].dTrading!;
+    return _layoutController.currenciesItem![index].dTrading!;
+  }
+
+  void addFavourite(String s_currency, String s_udid) {
+    ApiRequest(
+        path: ADDFAVOURITES,
+        method: postMethod,
+        withLoading: true,
+        body: {
+          's_currency': s_currency,
+          's_udid': s_udid,
+        }).request(
+          onSuccess: (data, response) {
+            Get.snackbar('', response['status']);
+          },
+        );
   }
 }

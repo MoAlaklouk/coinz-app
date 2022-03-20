@@ -11,5 +11,10 @@ String dateFormat2(DateTime value) {
   return format.format(value);
 }
 
+numFormat(number) {
+  var f = NumberFormat("###.0#");
+  return f.format(number);
+}
+
 int pageNum = 1;
 int pageCount = 20;

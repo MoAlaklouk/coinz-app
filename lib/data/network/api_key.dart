@@ -6,3 +6,5 @@ var tokenKey = 'token';
 
 const CURRENCIES = 'currencies/list';
 const FAVOURITES = 'favourites/list';
+const ADDFAVOURITES = 'favourites';
+

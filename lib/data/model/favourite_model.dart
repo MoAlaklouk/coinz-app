@@ -93,3 +93,30 @@ class Favourites {
     dtDeletedDate = json['dt_deleted_date'];
   }
 }
+
+class Add {
+  Status? status;
+
+  Add({this.status});
+
+  Add.fromJson(Map<String, dynamic> json) {
+    status =
+        json['status'] != null ? new Status.fromJson(json['status']) : null;
+  }
+}
+
+class StatusAdd {
+  bool? success;
+  int? code;
+  String? message;
+
+  StatusAdd({this.success, this.code, this.message});
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['success'] = this.success;
+    data['code'] = this.code;
+    data['message'] = this.message;
+    return data;
+  }
+}

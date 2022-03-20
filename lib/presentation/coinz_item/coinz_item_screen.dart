@@ -19,7 +19,7 @@ class CoinzItemScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CoinzItemController>(
-      builder: (controller) =>  Scaffold(
+      builder: (controller) => Scaffold(
         appBar: AppBar(
           elevation: AppSize.s0,
         ),
@@ -45,7 +45,7 @@ class CoinzItemScreen extends StatelessWidget {
           ),
       itemCount: controller.count);
 
-  Widget  lodeMore(CoinzItemController controller) => RefreshIndicator(
+  Widget lodeMore(CoinzItemController controller) => RefreshIndicator(
         onRefresh: () => controller.refreshing(),
         child: LoadMore(
           isFinish: controller.count >= 100,
@@ -61,7 +61,7 @@ class CoinzItemScreen extends StatelessWidget {
           },
         ),
       );
-  Widget coinzListItem(index, CoinzItemController  controller) => Container(
+  Widget coinzListItem(index, CoinzItemController controller) => Container(
         margin: EdgeInsets.symmetric(horizontal: AppMargin.m4),
         height: AppHeightSize.sh35,
         child: Row(
@@ -83,11 +83,15 @@ class CoinzItemScreen extends StatelessWidget {
                     flex: 2,
                     child: CachedNetworkImage(
                       imageUrl: controller.getImageUrl(index),
-                      imageBuilder: (context, imageProvider) => CircleAvatar(
-                        radius: 12,
-                        backgroundImage: imageProvider,
+                      imageBuilder: (context, imageProvider) =>
+                          Image(image: imageProvider),
+                      errorWidget: (context, url, error) => CircleAvatar(
+                        backgroundColor: ColorManager.lightGreyBorder,
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    width: AppWidthSize.sw12,
                   ),
                   Expanded(
                     flex: 7,

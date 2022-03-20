@@ -10,14 +10,13 @@ class HomeController extends GetxController {
   void onInit() {
     getFavouritesCoinz();
     super.onInit();
-    
   }
 
   LayoutController _layoutController = LayoutController.instance;
 
   bool islaod = true;
 
-  String getNameCoinz(int index) {  
+  String getNameCoinz(int index) {
     int indexOfSubString = _layoutController
         .currenciesModel!.currencies![index].sName!
         .indexOf('(');
@@ -30,7 +29,17 @@ class HomeController extends GetxController {
   }
 
   String getValueOfCoinz(int index) {
-    return _layoutController.currenciesModel!.currencies![index].dValue!;
+    var length =
+        _layoutController.currenciesModel!.currencies![index].dValue!.length;
+    int indexOfSubString = _layoutController
+        .currenciesModel!.currencies![index].dValue!
+        .indexOf('.');
+    if (length > indexOfSubString + 2) {
+      return _layoutController.currenciesModel!.currencies![index].dValue!
+          .substring(0, indexOfSubString + 3);
+    } else {
+      return _layoutController.currenciesModel!.currencies![index].dValue!;
+    }
   }
 
   String getTradingOfCoinz(int index) {
@@ -39,7 +48,7 @@ class HomeController extends GetxController {
 
   FavouritesModel? favouritesModel;
   void getFavouritesCoinz() {
-    bool islaod = false;
+    islaod = false;
 
     ApiRequest(
       path: FAVOURITES,
@@ -47,11 +56,13 @@ class HomeController extends GetxController {
     ).request(
       onSuccess: (data, response) {
         favouritesModel = FavouritesModel.fromJson(response);
-        bool islaod = false;
+        islaod = true;
+        update();
       },
       onError: (error) {
         print(error.toString());
-        bool islaod = false;
+        islaod = true;
+        update();
       },
     );
   }

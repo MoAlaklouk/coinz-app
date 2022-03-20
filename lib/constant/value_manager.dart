@@ -146,6 +146,8 @@ class AppHeightSize {
 
   static double sh100 = 100.0.h;
   static double sh120 = 120.0.h;
+  static double sh180 = 180.0.h;
+
   static double sh200 = 200.0.h;
   static double sh280 = 280.0.h;
 
