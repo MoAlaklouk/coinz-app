@@ -1,19 +1,19 @@
-class FavouritesModel {
+class NewsModel {
   Status? status;
   Pagination? pagination;
-  List<Favourites>? favourites;
+  List<News>? news;
 
-  FavouritesModel({this.status, this.pagination, this.favourites});
+  NewsModel({this.status, this.pagination, this.news});
 
-  FavouritesModel.fromJson(Map<String, dynamic> json) {
+  NewsModel.fromJson(Map<String, dynamic> json) {
     status = json['status'] != null ? Status.fromJson(json['status']) : null;
     pagination = json['pagination'] != null
         ? Pagination.fromJson(json['pagination'])
         : null;
-    if (json['favourites'] != null) {
-      favourites = <Favourites>[];
-      json['favourites'].forEach((v) {
-        favourites!.add(Favourites.fromJson(v));
+    if (json['news'] != null) {
+      news = <News>[];
+      json['news'].forEach((v) {
+        news!.add(News.fromJson(v));
       });
     }
   }
@@ -56,42 +56,34 @@ class Pagination {
   }
 }
 
-class Favourites {
+class News {
   int? pkIId;
-  String? sCode;
-  String? sName;
-  String? dValue;
-  String? dTrading;
-  String? sIcon;
+  String? sTitle;
+  String? sImage;
+  String? sDescription;
   bool? bEnabled;
   String? dtCreatedDate;
   String? dtModifiedDate;
   Null? dtDeletedDate;
 
-  Favourites(
+  News(
       {this.pkIId,
-      this.sCode,
-      this.sName,
-      this.dValue,
-      this.dTrading,
-      this.sIcon,
+      this.sTitle,
+      this.sImage,
+      this.sDescription,
       this.bEnabled,
       this.dtCreatedDate,
       this.dtModifiedDate,
       this.dtDeletedDate});
 
-  Favourites.fromJson(Map<String, dynamic> json) {
+  News.fromJson(Map<String, dynamic> json) {
     pkIId = json['pk_i_id'];
-    sCode = json['s_code'];
-    sName = json['s_name'];
-    dValue = json['d_value'];
-    dTrading = json['d_trading'];
-    sIcon = json['s_icon'];
+    sTitle = json['s_title'];
+    sImage = json['s_image'];
+    sDescription = json['s_description'];
     bEnabled = json['b_enabled'];
     dtCreatedDate = json['dt_created_date'];
     dtModifiedDate = json['dt_modified_date'];
     dtDeletedDate = json['dt_deleted_date'];
   }
 }
-
-

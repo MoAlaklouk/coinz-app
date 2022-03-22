@@ -28,7 +28,7 @@ List<GetPage<dynamic>> appRoutes = [
   ),
   GetPage(
     name: Routes.newsDetailsRoute,
-    page: () => const NewsDetailsScreen(),
+    page: () =>  NewsDetailsScreen(),
     transition: Transition.fade,
     transitionDuration: Duration(seconds: AppDuration.d1),
   ),

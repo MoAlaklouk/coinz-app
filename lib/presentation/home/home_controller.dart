@@ -6,6 +6,13 @@ import 'package:coinz_app/presentation/layout/layout_controller.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
+  
+  HomeController._();
+  static late final HomeController _instance = HomeController._();
+  static HomeController get instance => _instance;
+  factory HomeController() {
+    return _instance;
+  }
   @override
   void onInit() {
     getFavouritesCoinz();
@@ -53,6 +60,10 @@ class HomeController extends GetxController {
     ApiRequest(
       path: FAVOURITES,
       method: getMethod,
+      queryParameters: {
+        'i_page_count': 4,
+        'i_page_number': 1,
+      },
     ).request(
       onSuccess: (data, response) {
         favouritesModel = FavouritesModel.fromJson(response);

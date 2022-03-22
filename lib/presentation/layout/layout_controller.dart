@@ -8,15 +8,15 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../constant/assets_manager.dart';
 import '../../constant/string_manager.dart';
+import '../../data/model/news_model.dart';
 import '../alart_coinz/alart_coinz_screen..dart';
 import '../home/home_screen.dart';
 import '../news/news_screen.dart';
 
 class LayoutController extends GetxController {
   @override
-  void onInit() {
-    getCurrencies(page_count: pageCount, page_number: pageNum);
-
+  void onInit() async {
+    getCurrencies(pageCount: coinzPageCount, pageNumber: coinzPageNum);
     super.onInit();
   }
 
@@ -28,7 +28,6 @@ class LayoutController extends GetxController {
   }
 
   bool islaod = true;
-  int currantPageIndex = 0;
   List<Widget> secreens = [
     HomeScreen(),
     AlartScreen(),
@@ -52,6 +51,7 @@ class LayoutController extends GetxController {
       activeIcon: SvgPicture.asset(AssetsManager.bottomNavBarReportAc),
     ),
   ];
+  int currantPageIndex = 0;
 
   void changeBottomNavigationBar(int index, context) {
     currantPageIndex = index;
@@ -61,24 +61,25 @@ class LayoutController extends GetxController {
   CurrenciesModel? currenciesModel;
   List<Currencies>? currenciesItem = [];
   void getCurrencies({
-    required int page_count,
-    required int page_number,
+    required int pageCount,
+    required int pageNumber,
   }) {
     islaod = false;
+
     ApiRequest(
       path: CURRENCIES,
       method: getMethod,
       queryParameters: {
-        'i_page_count': page_count,
-        'i_page_number': page_number,
+        'i_page_count': pageCount,
+        'i_page_number': pageNumber,
       },
     ).request(
       onSuccess: (data, response) {
-        pageNum++;
+        coinzPageNum++;
 
         currenciesModel = CurrenciesModel.fromJson(response);
         currenciesItem!.addAll(List.generate(
-          page_count,
+          pageCount,
           (index) => currenciesModel!.currencies![index],
         ));
         islaod = true;
@@ -86,7 +87,7 @@ class LayoutController extends GetxController {
       },
       onError: (error) {
         print(error.toString());
-        islaod = true;
+
         update();
       },
     );

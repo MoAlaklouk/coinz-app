@@ -1,3 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:coinz_app/data/network/remote/loading.dart';
+
 import '../../app/app_router/app_router.dart';
 import '../../constant/assets_manager.dart';
 import '../../constant/color_manger.dart';
@@ -14,25 +17,28 @@ import 'package:loadmore/loadmore.dart';
 
 class NewsScreen extends StatelessWidget {
   NewsScreen({Key? key}) : super(key: key);
-  NewsController newsController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<NewsController>(
-      builder: (controller) => Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppPadding.p21),
-        child: Scaffold(
-          body: Column(
-            children: [
-              SizedBox(
-                height: AppHeightSize.sh38,
-              ),
-              newsTitel(),
-              SizedBox(
-                height: AppHeightSize.sh5,
-              ),
-              // Expanded(child: listNews()),
-              Expanded(child: lodeMore(controller)),
-            ],
+      builder: (controller) => MyBuildCondition(
+        condition: newsModel != null,
+        builder: (context) => Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppPadding.p21),
+          child: Scaffold(
+            body: Column(
+              children: [
+                SizedBox(
+                  height: AppHeightSize.sh38,
+                ),
+                newsTitel(),
+                SizedBox(
+                  height: AppHeightSize.sh5,
+                ),
+                // Expanded(child: listNews()),
+                Expanded(child: lodeMore(controller)),
+              ],
+            ),
           ),
         ),
       ),
@@ -52,7 +58,7 @@ class NewsScreen extends StatelessWidget {
 
   Widget listNews(NewsController controller) {
     return ListView.separated(
-      itemBuilder: (context, index) => newsItem(),
+      itemBuilder: (context, index) => newsItem(controller, index),
       separatorBuilder: (context, index) => SizedBox(
         height: AppHeightSize.sh10,
       ),
@@ -60,12 +66,12 @@ class NewsScreen extends StatelessWidget {
     );
   }
 
-  Widget newsItem() => InkWell(
+  Widget newsItem(NewsController controller, index) => InkWell(
         onTap: () {
-          Get.toNamed(Routes.newsDetailsRoute);
+          Get.toNamed(Routes.newsDetailsRoute, arguments: index);
         },
         child: Container(
-          height: 107.h,
+          height: AppHeightSize.sh107,
           padding: EdgeInsets.all(AppPadding.p8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSize.s8),
@@ -73,19 +79,25 @@ class NewsScreen extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Container(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                width: AppWidthSize.sw123,
-                height: AppHeightSize.sh94,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(AppSize.s8),
-                  border: Border.all(color: ColorManager.lightGreyBorder),
-                  image: const DecorationImage(
-                      image: AssetImage(
-                        AssetsManager.rectangle,
-                      ),
-                      fit: BoxFit.cover),
+              CachedNetworkImage(
+                imageUrl: controller.newsImage(index),
+                imageBuilder: (context, image) => Container(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  width: AppWidthSize.sw123,
+                  height: AppHeightSize.sh94,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(AppSize.s8),
+                    border: Border.all(color: ColorManager.lightGreyBorder),
+                    image: DecorationImage(image: image, fit: BoxFit.cover),
+                  ),
                 ),
+                errorWidget: (context, url, error) => Container(
+                    width: AppWidthSize.sw123,
+                    height: AppHeightSize.sh94,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(AppSize.s8),
+                        color: ColorManager.lightGreyBorder)),
               ),
               SizedBox(
                 width: AppWidthSize.sw11,
@@ -100,7 +112,7 @@ class NewsScreen extends StatelessWidget {
                       Container(
                         height: AppHeightSize.sh65,
                         child: Text(
-                          'انتعاش في قيمة العملات الرقمية الرئيسية تمثلت بارتفاع كل من البيتكوين والاثيريوم وكاردانو',
+                          controller.newstitle(index),
                           maxLines: 4,
                           style: getRegularStyle(
                               color: ColorManager.black,
@@ -111,9 +123,7 @@ class NewsScreen extends StatelessWidget {
                       Spacer(),
                       Container(
                         child: Text(
-                          dateFormat(
-                            DateTime.now(),
-                          ),
+                          controller.newsDate(index),
                           style: getMediumStyle(
                             color: ColorManager.black,
                           ),
@@ -128,19 +138,24 @@ class NewsScreen extends StatelessWidget {
         ),
       );
 
-  Widget lodeMore(NewsController controller) => RefreshIndicator(
-        onRefresh: () => controller.refreshing(),
-        child: LoadMore(
-          whenEmptyLoad: false,
-          isFinish: controller.count >= 30,
-          onLoadMore: () => controller.loadMore(),
-          child: listNews(controller),
-          textBuilder: (status) {
-            if (status == LoadMoreStatus.nomore)
-              return AppString.endLoading;
-            else
-              return AppString.isLoading;
-          },
-        ),
-      );
+  Widget lodeMore(NewsController controller) {
+    print(controller.end);
+    return RefreshIndicator(
+      onRefresh: () => controller.refreshing(),
+      child: LoadMore(
+        whenEmptyLoad: false,
+        isFinish: controller.end,
+        onLoadMore: () {
+          return controller.loadMore();
+        },
+        child: listNews(controller),
+        textBuilder: (status) {
+          if (status == LoadMoreStatus.nomore)
+            return AppString.endLoading;
+          else
+            return AppString.isLoading;
+        },
+      ),
+    );
+  }
 }

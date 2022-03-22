@@ -1,3 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:coinz_app/presentation/news/news_controller.dart';
+import 'package:get/get.dart';
+
 import '../../constant/assets_manager.dart';
 import '../../constant/color_manger.dart';
 import '../../constant/fonts_manager.dart';
@@ -10,8 +14,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NewsDetailsScreen extends StatelessWidget {
-  const NewsDetailsScreen({Key? key}) : super(key: key);
-
+  NewsDetailsScreen({Key? key}) : super(key: key);
+  int newsIndex = Get.arguments;
+  NewsController newsController = NewsController.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +59,7 @@ class NewsDetailsScreen extends StatelessWidget {
   Widget titelNewsDetails() => Container(
         margin: EdgeInsets.symmetric(horizontal: AppMargin.m27),
         child: Text(
-          AppString.titelNewsDetails,
+          newsController.newstitle(newsIndex),
           style: getSemiBoldStyle(
               color: ColorManager.black, fontSize: FontSize.s20),
         ),
@@ -63,17 +68,24 @@ class NewsDetailsScreen extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: AppMargin.m27),
         alignment: Alignment.centerRight,
         child: Text(
-          dateFormat2(DateTime.now()),
+          newsController.newsDate(newsIndex),
           style: getSemiBoldStyle(
               color: ColorManager.lightGrey, fontSize: FontSize.s12),
         ),
       );
-  Widget newsImage() => Container(
-        width: double.infinity,
-        height: AppHeightSize.sh200,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(AssetsManager.rectangle), fit: BoxFit.cover),
+  Widget newsImage() => CachedNetworkImage(
+        imageUrl: newsController.newsImage(newsIndex),
+        imageBuilder: (context, image) => Container(
+          width: double.infinity,
+          height: AppHeightSize.sh200,
+          decoration: BoxDecoration(
+            image: DecorationImage(image: image, fit: BoxFit.cover),
+          ),
+        ),
+        errorWidget: ( context, url, error)=> Container(
+          width: double.infinity,
+          height: AppHeightSize.sh200,
+         color: ColorManager.lightGreyBorder,
         ),
       );
 
@@ -131,7 +143,7 @@ class NewsDetailsScreen extends StatelessWidget {
   Widget newsBodyText() => Container(
         margin: EdgeInsets.symmetric(horizontal: AppMargin.m27),
         child: Text(
-          AppString.newsBodyText,
+          newsController.newsbody(newsIndex),
           style: getRegularStyle(
               color: ColorManager.black, fontSize: FontSize.s14.sp),
         ),

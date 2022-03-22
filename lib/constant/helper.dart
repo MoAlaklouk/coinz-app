@@ -16,5 +16,7 @@ numFormat(number) {
   return f.format(number);
 }
 
-int pageNum = 1;
-int pageCount = 20;
+int coinzPageNum = 1;
+int coinzPageCount = 20;
+int newsPageNum = 1;
+int newsPageCount = 6;

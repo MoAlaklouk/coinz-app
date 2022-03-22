@@ -1,8 +1,10 @@
 import 'package:coinz_app/constant/helper.dart';
 import 'package:coinz_app/data/model/coinz_model.dart';
+import 'package:coinz_app/data/model/state_model.dart';
 import 'package:coinz_app/data/network/api_key.dart';
 import 'package:coinz_app/data/network/remote/api.dart';
 import 'package:coinz_app/data/network/remote/methods.dart';
+import 'package:coinz_app/presentation/home/home_controller.dart';
 import 'package:coinz_app/presentation/layout/layout_controller.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +15,7 @@ class CoinzItemController extends GetxController {
   }
 
   final LayoutController _layoutController = LayoutController.instance;
+  final HomeController _homeController = HomeController.instance;
 
   int get count => listOfCoinzItem.length;
 
@@ -22,10 +25,10 @@ class CoinzItemController extends GetxController {
     print("load");
 
     _layoutController.getCurrencies(
-        page_count: pageCount, page_number: pageNum);
+        pageCount: coinzPageCount, pageNumber: coinzPageNum);
 
     listOfCoinzItem.addAll(
-      List.generate(pageCount, (v) => _layoutController.currenciesItem![v]),
+      List.generate(coinzPageCount, (v) => _layoutController.currenciesItem![v]),
     );
 
     print("data count = ${_layoutController.currenciesItem!.length}");
@@ -38,7 +41,7 @@ class CoinzItemController extends GetxController {
   Future<bool> loadMore() async {
     print("onLoadMore");
 
-    print("$pageNum");
+  
 
     await Future.delayed(Duration(seconds: 0, milliseconds: 700));
     load();
@@ -47,7 +50,7 @@ class CoinzItemController extends GetxController {
   }
 
   Future<void> refreshing() async {
-    pageNum = 1;
+    coinzPageNum = 1;
     print("refresh");
     await Future.delayed(Duration(seconds: 0, milliseconds: 700));
 
@@ -83,7 +86,8 @@ class CoinzItemController extends GetxController {
     return _layoutController.currenciesItem![index].dTrading!;
   }
 
-  void addFavourite(String s_currency, String s_udid) {
+  AddModel? addModel;
+  void addFavourite(String s_currency, int s_udid) {
     ApiRequest(
         path: ADDFAVOURITES,
         method: postMethod,
@@ -92,9 +96,11 @@ class CoinzItemController extends GetxController {
           's_currency': s_currency,
           's_udid': s_udid,
         }).request(
-          onSuccess: (data, response) {
-            Get.snackbar('', response['status']);
-          },
-        );
+      onSuccess: (data, response) {
+        addModel = AddModel.fromJson(response);
+        Get.snackbar('تنبه', '${addModel!.status!.message}');
+        _homeController.getFavouritesCoinz();
+      },
+    );
   }
 }
