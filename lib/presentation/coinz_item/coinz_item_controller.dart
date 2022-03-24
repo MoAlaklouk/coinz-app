@@ -1,3 +1,4 @@
+import 'package:coinz_app/app/my_app_controller.dart';
 import 'package:coinz_app/constant/helper.dart';
 import 'package:coinz_app/data/model/coinz_model.dart';
 import 'package:coinz_app/data/model/state_model.dart';
@@ -11,12 +12,16 @@ import 'package:get/get.dart';
 class CoinzItemController extends GetxController {
   void onInit() {
     super.onInit();
+
     load();
   }
 
+  MyAppController myAppController = Get.find();
   final LayoutController _layoutController = LayoutController.instance;
   final HomeController _homeController = HomeController.instance;
 
+  
+ 
   int get count => listOfCoinzItem.length;
 
   List<Currencies> listOfCoinzItem = [];
@@ -28,7 +33,8 @@ class CoinzItemController extends GetxController {
         pageCount: coinzPageCount, pageNumber: coinzPageNum);
 
     listOfCoinzItem.addAll(
-      List.generate(coinzPageCount, (v) => _layoutController.currenciesItem![v]),
+      List.generate(
+          coinzPageCount, (v) => _layoutController.currenciesItem![v]),
     );
 
     print("data count = ${_layoutController.currenciesItem!.length}");
@@ -40,8 +46,6 @@ class CoinzItemController extends GetxController {
 
   Future<bool> loadMore() async {
     print("onLoadMore");
-
-  
 
     await Future.delayed(Duration(seconds: 0, milliseconds: 700));
     load();
@@ -87,14 +91,14 @@ class CoinzItemController extends GetxController {
   }
 
   AddModel? addModel;
-  void addFavourite(String s_currency, int s_udid) {
+  void addFavourite(String s_currency) {
     ApiRequest(
         path: ADDFAVOURITES,
         method: postMethod,
         withLoading: true,
         body: {
           's_currency': s_currency,
-          's_udid': s_udid,
+          's_udid': myAppController.deviceData['id'],
         }).request(
       onSuccess: (data, response) {
         addModel = AddModel.fromJson(response);

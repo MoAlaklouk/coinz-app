@@ -1,8 +1,10 @@
+import 'package:coinz_app/app/my_app_controller.dart';
 import 'package:coinz_app/constant/helper.dart';
 import 'package:coinz_app/data/model/coinz_model.dart';
 import 'package:coinz_app/data/network/api_key.dart';
 import 'package:coinz_app/data/network/remote/api.dart';
 import 'package:coinz_app/data/network/remote/methods.dart';
+import 'package:coinz_app/presentation/coinz_item/coinz_item_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -87,9 +89,10 @@ class LayoutController extends GetxController {
       },
       onError: (error) {
         print(error.toString());
-
         update();
       },
     );
   }
+
+  
 }

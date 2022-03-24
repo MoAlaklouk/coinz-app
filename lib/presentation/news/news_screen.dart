@@ -98,6 +98,13 @@ class NewsScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(AppSize.s8),
                         color: ColorManager.lightGreyBorder)),
+                        placeholder:  (context, url) =>Container(
+                    width: AppWidthSize.sw123,
+                    height: AppHeightSize.sh94,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(AppSize.s8),
+                        color: ColorManager.lightGreyBorder)),
               ),
               SizedBox(
                 width: AppWidthSize.sw11,

@@ -2,22 +2,25 @@ import 'package:coinz_app/data/model/favourite_model.dart';
 import 'package:coinz_app/data/network/api_key.dart';
 import 'package:coinz_app/data/network/remote/api.dart';
 import 'package:coinz_app/data/network/remote/methods.dart';
+import 'package:coinz_app/presentation/coinz_item/coinz_item_controller.dart';
 import 'package:coinz_app/presentation/layout/layout_controller.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
+  @override
+  void onInit() {
+    getFavouritesCoinz();
   
+    super.onInit();
+  }
+
   HomeController._();
   static late final HomeController _instance = HomeController._();
   static HomeController get instance => _instance;
   factory HomeController() {
     return _instance;
   }
-  @override
-  void onInit() {
-    getFavouritesCoinz();
-    super.onInit();
-  }
+
 
   LayoutController _layoutController = LayoutController.instance;
 
@@ -31,7 +34,7 @@ class HomeController extends GetxController {
         .substring(0, indexOfSubString);
   }
 
-  String getImageUrl(int index) {
+  String getCoinzImageUrl(int index) {
     return _layoutController.currenciesModel!.currencies![index].sIcon!;
   }
 
@@ -76,5 +79,28 @@ class HomeController extends GetxController {
         update();
       },
     );
+  }
+
+  String getNameFavourite(int index) {
+    int indexOfSubString =
+        favouritesModel!.favourites![index].sName!.indexOf('(');
+    return favouritesModel!.favourites![index].sName!
+        .substring(0, indexOfSubString);
+  }
+
+  String getFavouriteImageUrl(int index) {
+    return favouritesModel!.favourites![index].sIcon!;
+  }
+
+  String getValueOfFavourite(int index) {
+    var length = favouritesModel!.favourites![index].dValue!.length;
+    int indexOfSubString =
+        favouritesModel!.favourites![index].dValue!.indexOf('.');
+    if (length > indexOfSubString + 2) {
+      return favouritesModel!.favourites![index].dValue!
+          .substring(0, indexOfSubString + 3);
+    } else {
+      return favouritesModel!.favourites![index].dValue!;
+    }
   }
 }

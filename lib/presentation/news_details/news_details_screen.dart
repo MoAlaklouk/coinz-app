@@ -87,6 +87,11 @@ class NewsDetailsScreen extends StatelessWidget {
           height: AppHeightSize.sh200,
          color: ColorManager.lightGreyBorder,
         ),
+        placeholder:( context, url)=> Container(
+          width: double.infinity,
+          height: AppHeightSize.sh200,
+         color: ColorManager.lightGreyBorder,
+        ),
       );
 
   Widget socialMediaButton() => Container(

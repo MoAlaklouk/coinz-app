@@ -19,4 +19,4 @@ numFormat(number) {
 int coinzPageNum = 1;
 int coinzPageCount = 20;
 int newsPageNum = 1;
-int newsPageCount = 6;
+int newsPageCount = 7;

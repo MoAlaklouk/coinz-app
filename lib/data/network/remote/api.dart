@@ -33,8 +33,10 @@ class ApiRequest {
           'Authorization': _myAppController.token != null
               ? 'Bearer ${_myAppController.token}'
               : 'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE1LCJpc3MiOiJodHRwOlwvXC86IiwiaWF0IjoxNTE3OTk0MjczLCJleHAiOjE1MjMxNzgyNzMsIm5iZiI6MTUxNzk5NDI3MywianRpIjoib1c5b2JaNEtRNXdMZTBJMCJ9.0x5zVrS22O8Kq3kRFljtBwO8g0oGfrW3GG_vEse8CQE',
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': '*/*',
+          'Accept-Encoding': 'gzip, deflate, br',
+          'Connection': 'keep-alive',
+          'X-Client-Device-UDID': _myAppController.deviceData['id'],
         },
       ),
     );
@@ -120,7 +122,7 @@ class ApiRequest {
         //           ? errorData["errors"][0]["message"]
         //           : errorData["message"],
         //   textColor: ColorManager.error,
-        // ); 
+        // );
         // print response error
         printRequestError(error: errorData, time: time);
 

@@ -126,7 +126,7 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CachedNetworkImage(
-              imageUrl: controller.getImageUrl(index),
+              imageUrl: controller.getFavouriteImageUrl(index),
               imageBuilder: (context, imageProvider) => Container(
                   height: AppHeightSize.sh25,
                   child: Image(image: imageProvider)),
@@ -141,7 +141,7 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  controller.getNameCoinz(index),
+                  controller.getNameFavourite(index),
                   style: getMediumStyle(
                       color: ColorManager.white, fontSize: FontSize.s14.sp),
                 ),
@@ -150,7 +150,7 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(controller.getValueOfCoinz(index),
+                Text(controller.getValueOfFavourite(index),
                     style: TextStyle(
                         color: ColorManager.white, fontSize: FontSize.s12.sp)),
                 Text(
@@ -222,7 +222,7 @@ class HomeScreen extends StatelessWidget {
                   Expanded(
                     flex: 2,
                     child: CachedNetworkImage(
-                      imageUrl: controller.getImageUrl(index),
+                      imageUrl: controller.getCoinzImageUrl(index),
                       imageBuilder: (context, imageProvider) =>
                           Image(image: imageProvider),
                       errorWidget: (context, url, error) => CircleAvatar(

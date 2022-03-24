@@ -67,7 +67,7 @@ class CoinzItemScreen extends StatelessWidget {
         onTap: () {
           controller.addFavourite(
               layoutController.currenciesItem![index].sCode!,
-              layoutController.currenciesItem![index].pkIId!);
+       );
         },
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: AppMargin.m4),
