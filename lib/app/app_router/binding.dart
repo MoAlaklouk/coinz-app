@@ -1,5 +1,5 @@
-import 'package:coinz_app/presentation/coinz_item/coinz_item_controller.dart';
-import 'package:coinz_app/presentation/home/home_controller.dart';
+import '../../presentation/coinz_item/coinz_item_controller.dart';
+import '../../presentation/home/home_controller.dart';
 import 'package:get/get.dart';
 
 import '../../presentation/alart_coinz/alart_coinz_controller.dart';

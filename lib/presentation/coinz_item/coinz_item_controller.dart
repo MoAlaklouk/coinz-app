@@ -1,12 +1,12 @@
-import 'package:coinz_app/app/my_app_controller.dart';
-import 'package:coinz_app/constant/helper.dart';
-import 'package:coinz_app/data/model/coinz_model.dart';
-import 'package:coinz_app/data/model/state_model.dart';
-import 'package:coinz_app/data/network/api_key.dart';
-import 'package:coinz_app/data/network/remote/api.dart';
-import 'package:coinz_app/data/network/remote/methods.dart';
-import 'package:coinz_app/presentation/home/home_controller.dart';
-import 'package:coinz_app/presentation/layout/layout_controller.dart';
+import '../../app/my_app_controller.dart';
+import '../../constant/helper.dart';
+import '../../data/model/coinz_model.dart';
+import '../../data/model/state_model.dart';
+import '../../data/network/api_key.dart';
+import '../../data/network/remote/api.dart';
+import '../../data/network/remote/methods.dart';
+import '../home/home_controller.dart';
+import '../layout/layout_controller.dart';
 import 'package:get/get.dart';
 
 class CoinzItemController extends GetxController {
@@ -20,8 +20,6 @@ class CoinzItemController extends GetxController {
   final LayoutController _layoutController = LayoutController.instance;
   final HomeController _homeController = HomeController.instance;
 
-  
- 
   int get count => listOfCoinzItem.length;
 
   List<Currencies> listOfCoinzItem = [];
@@ -33,11 +31,10 @@ class CoinzItemController extends GetxController {
         pageCount: coinzPageCount, pageNumber: coinzPageNum);
 
     listOfCoinzItem.addAll(
-      List.generate(
-          coinzPageCount, (v) => _layoutController.currenciesItem![v]),
+      List.generate(coinzPageCount, (v) => currenciesItem![v]),
     );
 
-    print("data count = ${_layoutController.currenciesItem!.length}");
+    print("data count = ${currenciesItem!.length}");
 
     print("data count2 = $count");
 
@@ -64,30 +61,26 @@ class CoinzItemController extends GetxController {
   }
 
   String getNameCoinz(int index) {
-    int indexOfSubString =
-        _layoutController.currenciesItem![index].sName!.indexOf('(');
-    return _layoutController.currenciesItem![index].sName!
-        .substring(0, indexOfSubString);
+    int indexOfSubString = currenciesItem![index].sName!.indexOf('(');
+    return currenciesItem![index].sName!.substring(0, indexOfSubString);
   }
 
   String getImageUrl(int index) {
-    return _layoutController.currenciesItem![index].sIcon!;
+    return currenciesItem![index].sIcon!;
   }
 
   String getValueOfCoinz(int index) {
-    var length = _layoutController.currenciesItem![index].dValue!.length;
-    int indexOfSubString =
-        _layoutController.currenciesItem![index].dValue!.indexOf('.');
+    var length = currenciesItem![index].dValue!.length;
+    int indexOfSubString = currenciesItem![index].dValue!.indexOf('.');
     if (length > indexOfSubString + 2) {
-      return _layoutController.currenciesItem![index].dValue!
-          .substring(0, indexOfSubString + 3);
+      return currenciesItem![index].dValue!.substring(0, indexOfSubString + 3);
     } else {
-      return _layoutController.currenciesItem![index].dValue!;
+      return currenciesItem![index].dValue!;
     }
   }
 
   String getTradingOfCoinz(int index) {
-    return _layoutController.currenciesItem![index].dTrading!;
+    return currenciesItem![index].dTrading!;
   }
 
   AddModel? addModel;

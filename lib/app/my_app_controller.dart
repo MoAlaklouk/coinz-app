@@ -1,9 +1,6 @@
 import 'dart:io';
 
-import 'package:coinz_app/app/device_info.dart';
-import 'package:coinz_app/data/model/coinz_model.dart';
-import 'package:coinz_app/data/network/remote/api.dart';
-import 'package:coinz_app/data/network/remote/methods.dart';
+import 'device_info.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -64,13 +61,6 @@ class MyAppController extends GetxController {
           deviceData = readAndroidBuildData(await deviceInfoPlugin.androidInfo);
         } else if (Platform.isIOS) {
           deviceData = readIosDeviceInfo(await deviceInfoPlugin.iosInfo);
-        } else if (Platform.isLinux) {
-          deviceData = readLinuxDeviceInfo(await deviceInfoPlugin.linuxInfo);
-        } else if (Platform.isMacOS) {
-          deviceData = readMacOsDeviceInfo(await deviceInfoPlugin.macOsInfo);
-        } else if (Platform.isWindows) {
-          deviceData =
-              readWindowsDeviceInfo(await deviceInfoPlugin.windowsInfo);
         }
       }
     } on PlatformException {
@@ -81,6 +71,6 @@ class MyAppController extends GetxController {
 
     deviceData = deviceData;
     update();
-    print(deviceData['id']);
+   
   }
 }

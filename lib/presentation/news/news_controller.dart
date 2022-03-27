@@ -1,6 +1,6 @@
-import 'package:coinz_app/constant/helper.dart';
-import 'package:coinz_app/data/model/news_model.dart';
-import 'package:coinz_app/data/network/remote/methods.dart';
+import '../../constant/helper.dart';
+import '../../data/model/news_model.dart';
+import '../../data/network/remote/methods.dart';
 
 import 'package:get/get.dart';
 

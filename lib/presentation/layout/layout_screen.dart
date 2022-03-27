@@ -1,4 +1,4 @@
-import 'package:coinz_app/data/network/remote/loading.dart';
+import '../../data/network/remote/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

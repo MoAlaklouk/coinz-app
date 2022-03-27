@@ -1,9 +1,9 @@
-import 'package:coinz_app/data/model/favourite_model.dart';
-import 'package:coinz_app/data/network/api_key.dart';
-import 'package:coinz_app/data/network/remote/api.dart';
-import 'package:coinz_app/data/network/remote/methods.dart';
-import 'package:coinz_app/presentation/coinz_item/coinz_item_controller.dart';
-import 'package:coinz_app/presentation/layout/layout_controller.dart';
+import '../../data/model/favourite_model.dart';
+import '../../data/network/api_key.dart';
+import '../../data/network/remote/api.dart';
+import '../../data/network/remote/methods.dart';
+import '../coinz_item/coinz_item_controller.dart';
+import '../layout/layout_controller.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {

@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:coinz_app/constant/assets_manager.dart';
-import 'package:coinz_app/constant/color_manger.dart';
-import 'package:coinz_app/constant/fonts_manager.dart';
-import 'package:coinz_app/constant/string_manager.dart';
-import 'package:coinz_app/constant/style_manager.dart';
-import 'package:coinz_app/constant/value_manager.dart';
-import 'package:coinz_app/presentation/coinz_item/coinz_item_controller.dart';
-import 'package:coinz_app/presentation/home/home_screen.dart';
-import 'package:coinz_app/presentation/layout/layout_controller.dart';
+import '../../constant/assets_manager.dart';
+import '../../constant/color_manger.dart';
+import '../../constant/fonts_manager.dart';
+import '../../constant/string_manager.dart';
+import '../../constant/style_manager.dart';
+import '../../constant/value_manager.dart';
+import 'coinz_item_controller.dart';
+import '../home/home_screen.dart';
+import '../layout/layout_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -66,8 +66,8 @@ class CoinzItemScreen extends StatelessWidget {
   Widget coinzListItem(index, CoinzItemController controller) => InkWell(
         onTap: () {
           controller.addFavourite(
-              layoutController.currenciesItem![index].sCode!,
-       );
+            currenciesItem![index].sCode!,
+          );
         },
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: AppMargin.m4),

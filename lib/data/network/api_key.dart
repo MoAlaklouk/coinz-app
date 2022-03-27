@@ -8,3 +8,4 @@ const CURRENCIES = 'currencies/list';
 const FAVOURITES = 'favourites/list';
 const ADDFAVOURITES = 'favourites';
 const NEWS = 'news/list';
+const ADDALART = 'triggers';

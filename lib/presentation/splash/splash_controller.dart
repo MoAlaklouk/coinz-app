@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:coinz_app/constant/value_manager.dart';
+import '../../constant/value_manager.dart';
 import '../../app/app_router/app_router.dart';
 import 'package:get/get.dart';
 

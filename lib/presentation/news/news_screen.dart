@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:coinz_app/data/network/remote/loading.dart';
+import '../../data/network/remote/loading.dart';
 
 import '../../app/app_router/app_router.dart';
 import '../../constant/assets_manager.dart';

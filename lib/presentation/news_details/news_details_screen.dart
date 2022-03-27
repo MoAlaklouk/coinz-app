@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:coinz_app/presentation/news/news_controller.dart';
+import '../news/news_controller.dart';
 import 'package:get/get.dart';
 
 import '../../constant/assets_manager.dart';

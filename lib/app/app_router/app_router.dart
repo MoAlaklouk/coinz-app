@@ -1,10 +1,10 @@
-import 'package:coinz_app/presentation/coinz_item/coinz_item_screen.dart';
-
-import '../../presentation/news_details/news_details_screen.dart';
-import '../../constant/value_manager.dart';
-import '../../presentation/layout/layout_screen.dart';
-import '../../presentation/splash/splash_screen.dart';
 import 'package:get/get.dart';
+
+import '../../constant/value_manager.dart';
+import '../../presentation/coinz_item/coinz_item_screen.dart';
+import '../../presentation/layout/layout_screen.dart';
+import '../../presentation/news_details/news_details_screen.dart';
+import '../../presentation/splash/splash_screen.dart';
 
 class Routes {
   static const String splashRoute = '/';

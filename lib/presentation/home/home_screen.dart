@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:coinz_app/app/app_router/app_router.dart';
-import 'package:coinz_app/data/model/coinz_model.dart';
-import 'package:coinz_app/data/network/remote/loading.dart';
-import 'package:coinz_app/presentation/home/home_controller.dart';
-import 'package:coinz_app/presentation/layout/layout_controller.dart';
+import '../../app/app_router/app_router.dart';
+import '../../data/model/coinz_model.dart';
+import '../../data/network/remote/loading.dart';
+import 'home_controller.dart';
+import '../layout/layout_controller.dart';
 import 'package:get/get.dart';
 
 import '../../constant/assets_manager.dart';
@@ -117,8 +117,8 @@ class HomeScreen extends StatelessWidget {
         clipBehavior: Clip.antiAliasWithSaveLayer,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSize.s8),
-          image: const DecorationImage(
-            image: AssetImage(AssetsManager.rectangle),
+          image: DecorationImage(
+            image: AssetImage(AssetsManager.rectangleBackground[index]),
             fit: BoxFit.cover,
           ),
         ),
@@ -127,9 +127,11 @@ class HomeScreen extends StatelessWidget {
           children: [
             CachedNetworkImage(
               imageUrl: controller.getFavouriteImageUrl(index),
-              imageBuilder: (context, imageProvider) => Container(
-                  height: AppHeightSize.sh25,
-                  child: Image(image: imageProvider)),
+              imageBuilder: (context, imageProvider) => Image(
+                height: AppHeightSize.sh25,
+                color: ColorManager.white,
+                image: imageProvider,
+              ),
               errorWidget: (context, url, error) => CircleAvatar(
                 backgroundColor: ColorManager.lightGreyBorder,
               ),

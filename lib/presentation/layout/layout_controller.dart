@@ -1,10 +1,10 @@
-import 'package:coinz_app/app/my_app_controller.dart';
-import 'package:coinz_app/constant/helper.dart';
-import 'package:coinz_app/data/model/coinz_model.dart';
-import 'package:coinz_app/data/network/api_key.dart';
-import 'package:coinz_app/data/network/remote/api.dart';
-import 'package:coinz_app/data/network/remote/methods.dart';
-import 'package:coinz_app/presentation/coinz_item/coinz_item_controller.dart';
+import '../../app/my_app_controller.dart';
+import '../../constant/helper.dart';
+import '../../data/model/coinz_model.dart';
+import '../../data/network/api_key.dart';
+import '../../data/network/remote/api.dart';
+import '../../data/network/remote/methods.dart';
+import '../coinz_item/coinz_item_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -61,7 +61,6 @@ class LayoutController extends GetxController {
   }
 
   CurrenciesModel? currenciesModel;
-  List<Currencies>? currenciesItem = [];
   void getCurrencies({
     required int pageCount,
     required int pageNumber,
@@ -96,3 +95,4 @@ class LayoutController extends GetxController {
 
   
 }
+  List<Currencies>? currenciesItem = [];

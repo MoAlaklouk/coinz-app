@@ -50,21 +50,7 @@ Map<String, dynamic> readAndroidBuildData(AndroidDeviceInfo build) {
     };
   }
 
-  Map<String, dynamic> readLinuxDeviceInfo(LinuxDeviceInfo data) {
-    return <String, dynamic>{
-      'name': data.name,
-      'version': data.version,
-      'id': data.id,
-      'idLike': data.idLike,
-      'versionCodename': data.versionCodename,
-      'versionId': data.versionId,
-      'prettyName': data.prettyName,
-      'buildId': data.buildId,
-      'variant': data.variant,
-      'variantId': data.variantId,
-      'machineId': data.machineId,
-    };
-  }
+ 
 
   Map<String, dynamic> readWebBrowserInfo(WebBrowserInfo data) {
     return <String, dynamic>{
@@ -86,25 +72,4 @@ Map<String, dynamic> readAndroidBuildData(AndroidDeviceInfo build) {
     };
   }
 
-  Map<String, dynamic> readMacOsDeviceInfo(MacOsDeviceInfo data) {
-    return <String, dynamic>{
-      'computerName': data.computerName,
-      'hostName': data.hostName,
-      'arch': data.arch,
-      'model': data.model,
-      'kernelVersion': data.kernelVersion,
-      'osRelease': data.osRelease,
-      'activeCPUs': data.activeCPUs,
-      'memorySize': data.memorySize,
-      'cpuFrequency': data.cpuFrequency,
-      'systemGUID': data.systemGUID,
-    };
-  }
-
-  Map<String, dynamic> readWindowsDeviceInfo(WindowsDeviceInfo data) {
-    return <String, dynamic>{
-      'numberOfCores': data.numberOfCores,
-      'computerName': data.computerName,
-      'systemMemoryInMegabytes': data.systemMemoryInMegabytes,
-    };
-  }
+ 

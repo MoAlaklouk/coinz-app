@@ -1,6 +1,7 @@
-import 'dart:math';
-
-import 'package:coinz_app/constant/enums.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import '../../constant/enums.dart';
+import '../../data/model/coinz_model.dart';
+import '../layout/layout_controller.dart';
 
 import '../../constant/assets_manager.dart';
 import '../../constant/color_manger.dart';
@@ -85,8 +86,8 @@ class AlartScreen extends StatelessWidget {
         ),
       );
 
-  Widget selectCoinzDropdown() => DropdownSearch(
-        showSearchBox: true,
+  Widget selectCoinzDropdown() => DropdownSearch<Currencies>(
+        items: currenciesItem,
         dropdownSearchDecoration: InputDecoration(
           border: OutlineInputBorder(
             borderSide: BorderSide(
@@ -97,35 +98,35 @@ class AlartScreen extends StatelessWidget {
               horizontal: AppPadding.p12, vertical: AppPadding.p8),
         ),
         onChanged: (data) {
-          print(data);
+          print(data!.sName);
         },
-        dropdownBuilder: (context, selectedItem) => selectCoinzDropdownItem(),
+        dropdownBuilder: (context, selectedItem) =>
+            selectCoinzDropdownItem(context, selectedItem),
         popupItemBuilder: (context, item, isSelected) =>
-            selectCoinzDropdownItem(),
+            selectCoinzDropdownItem(context, item),
       );
-  Widget selectCoinzDropdownItem() => Row(children: [
-        SvgPicture.asset(
-          AssetsManager.homeCoinzIcon,
-          color: ColorManager.black,
-          height: AppHeightSize.sh20,
-        ),
-        SizedBox(
-          width: AppWidthSize.sw14,
-        ),
-        Text(
-          AppString.textfavoriteCoinz,
-          style: getRegularStyle(
-              color: ColorManager.black, fontSize: FontSize.s15.sp),
-        ),
-        SizedBox(
-          width: AppWidthSize.sw9,
-        ),
-        Text(
-          AppString.textfavoriteCoinzEn,
-          style: getRegularStyle(
-              color: ColorManager.black, fontSize: FontSize.s16.sp),
-        )
-      ]);
+  Widget selectCoinzDropdownItem(context, Currencies? item) => Padding(
+        padding: EdgeInsets.all(AppPadding.p8),
+        child: Row(children: [
+          if (item?.sIcon != null)
+            CachedNetworkImage(
+                imageUrl: item?.sIcon ?? '',
+                imageBuilder: (context, image) => Container(
+                      height: AppHeightSize.sh20,
+                      child: Image(image: image),
+                    ),
+                errorWidget: (context, url, error) =>
+                    const Icon(IconManager.error)),
+          SizedBox(
+            width: AppWidthSize.sw14,
+          ),
+          Text(
+            item?.sName ?? 'اختار العملة',
+            style: getRegularStyle(
+                color: ColorManager.black, fontSize: FontSize.s16.sp),
+          ),
+        ]),
+      );
 
   Widget selectAlartTitel() => Container(
         alignment: Alignment.centerRight,
@@ -134,7 +135,7 @@ class AlartScreen extends StatelessWidget {
           AppString.selectAlartTital,
           style: getRegularStyle(
             color: ColorManager.grey,
-            fontSize: 12.sp,
+            fontSize: FontSize.s12.sp,
           ),
         ),
       );
@@ -154,7 +155,7 @@ class AlartScreen extends StatelessWidget {
                     left: BorderSide(color: ColorManager.lightGreyBorder))),
             alignment: Alignment.center,
             child: DropdownButton(
-            value: controller.dropdownValue,
+              value: controller.dropdownValue,
               underline: Container(),
               items: AlartValue.values
                   .map((e) => DropdownMenuItem(
@@ -165,7 +166,10 @@ class AlartScreen extends StatelessWidget {
                       )))
                   .toList(),
               onChanged: (value) {
-                print(value);
+                if (value == alartValue(AlartValue.MORETHAN)) {
+                  print(1);
+                }
+
                 controller.changeDropdownItem(value);
               },
             ),
