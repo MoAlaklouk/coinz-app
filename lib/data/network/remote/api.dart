@@ -35,10 +35,16 @@ class ApiRequest {
               : 'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE1LCJpc3MiOiJodHRwOlwvXC86IiwiaWF0IjoxNTE3OTk0MjczLCJleHAiOjE1MjMxNzgyNzMsIm5iZiI6MTUxNzk5NDI3MywianRpIjoib1c5b2JaNEtRNXdMZTBJMCJ9.0x5zVrS22O8Kq3kRFljtBwO8g0oGfrW3GG_vEse8CQE',
           'Accept': '*/*',
           'Accept-Encoding': 'gzip, deflate, br',
-          'X-Client-Language': 'ar',
           'Connection': 'keep-alive',
 
           'X-Client-Device-UDID': _myAppController.deviceData['id'],
+
+          'HeaderClientLanguageValue': 'ar',
+          'HeaderClientDeviceTypeValue': _myAppController.deviceData['id'],
+          'HeaderClientPlatformName': _myAppController.deviceData['id'],
+
+
+
         },
       ),
     );

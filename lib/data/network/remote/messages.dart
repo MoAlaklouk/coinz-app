@@ -18,12 +18,12 @@ showMessage({
     description!,
     titleText: Text(
       'تنبيه'.tr,
-      style: getBoldStyle(color: ColorManager.white, fontSize: FontSize.s14.sp),
+      style: getBoldStyle(color: ColorManager.white, fontSize: FontSizeManager.s14.sp),
     ),
     messageText: Text(
       description,
       style: getSemiBoldStyle(
-          color: ColorManager.white, fontSize: FontSize.s12.sp),
+          color: ColorManager.white, fontSize: FontSizeManager.s12.sp),
     ),
     backgroundColor: withBackground ? ColorManager.primary : null,
     barBlur: 2,

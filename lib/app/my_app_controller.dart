@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'device_info.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
@@ -22,6 +24,10 @@ class MyAppController extends GetxController {
     token = await localStorage.getFromStorage(key: tokenKey);
     userData = await localStorage.getFromStorage(key: cUserData);
     initPlatformState();
+    FirebaseMessaging.instance.getInitialMessage();
+    FirebaseMessaging.onMessage.listen((event) {
+      print(event.messageId);
+    });
     consoleLog(userData);
     consoleLog(token);
   }
@@ -50,6 +56,7 @@ class MyAppController extends GetxController {
 
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   Map<String, dynamic> deviceData = <String, dynamic>{};
+  String platFormType = '';
   Future<void> initPlatformState() async {
     var deviceData = <String, dynamic>{};
 
@@ -70,7 +77,7 @@ class MyAppController extends GetxController {
     }
 
     deviceData = deviceData;
+    print(deviceData);
     update();
-   
   }
 }

@@ -84,7 +84,7 @@ class CoinzItemScreen extends StatelessWidget {
                         '${index + 1}',
                         style: TextStyle(
                             color: ColorManager.lightGrey,
-                            fontSize: FontSize.s8.sp),
+                            fontSize: FontSizeManager.s8.sp),
                       ),
                     ),
                     Expanded(
@@ -107,7 +107,7 @@ class CoinzItemScreen extends StatelessWidget {
                         controller.getNameCoinz(index),
                         style: getRegularStyle(
                             color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
+                            fontSize: FontSizeManager.s14.sp),
                       ),
                     ),
                   ],
@@ -121,7 +121,7 @@ class CoinzItemScreen extends StatelessWidget {
                     Text(controller.getValueOfCoinz(index),
                         style: TextStyle(
                             color: ColorManager.black,
-                            fontSize: FontSize.s13.sp)),
+                            fontSize: FontSizeManager.s13.sp)),
                     Text(
                       AppString.dollarSign,
                       style: TextStyle(color: ColorManager.lightGrey),

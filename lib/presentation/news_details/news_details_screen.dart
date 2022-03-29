@@ -1,17 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import '../news/news_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../constant/assets_manager.dart';
 import '../../constant/color_manger.dart';
 import '../../constant/fonts_manager.dart';
-import '../../constant/helper.dart';
 import '../../constant/icon_manager.dart';
 import '../../constant/string_manager.dart';
 import '../../constant/style_manager.dart';
 import '../../constant/value_manager.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../news/news_controller.dart';
 
 class NewsDetailsScreen extends StatelessWidget {
   NewsDetailsScreen({Key? key}) : super(key: key);
@@ -27,7 +26,7 @@ class NewsDetailsScreen extends StatelessWidget {
             child: Text(
               AppString.shareString,
               style: getMediumStyle(
-                  color: ColorManager.black, fontSize: FontSize.s14.sp),
+                  color: ColorManager.black, fontSize: FontSizeManager.s14.sp),
             ),
           )
         ],
@@ -61,7 +60,7 @@ class NewsDetailsScreen extends StatelessWidget {
         child: Text(
           newsController.newstitle(newsIndex),
           style: getSemiBoldStyle(
-              color: ColorManager.black, fontSize: FontSize.s20),
+              color: ColorManager.black, fontSize: FontSizeManager.s20),
         ),
       );
   Widget dateNews() => Container(
@@ -70,7 +69,7 @@ class NewsDetailsScreen extends StatelessWidget {
         child: Text(
           newsController.newsDate(newsIndex),
           style: getSemiBoldStyle(
-              color: ColorManager.lightGrey, fontSize: FontSize.s12),
+              color: ColorManager.lightGrey, fontSize: FontSizeManager.s12),
         ),
       );
   Widget newsImage() => CachedNetworkImage(
@@ -82,15 +81,15 @@ class NewsDetailsScreen extends StatelessWidget {
             image: DecorationImage(image: image, fit: BoxFit.cover),
           ),
         ),
-        errorWidget: ( context, url, error)=> Container(
+        errorWidget: (context, url, error) => Container(
           width: double.infinity,
           height: AppHeightSize.sh200,
-         color: ColorManager.lightGreyBorder,
+          color: ColorManager.lightGreyBorder,
         ),
-        placeholder:( context, url)=> Container(
+        placeholder: (context, url) => Container(
           width: double.infinity,
           height: AppHeightSize.sh200,
-         color: ColorManager.lightGreyBorder,
+          color: ColorManager.lightGreyBorder,
         ),
       );
 
@@ -145,12 +144,13 @@ class NewsDetailsScreen extends StatelessWidget {
           ],
         ),
       );
-  Widget newsBodyText() => Container(
+  Widget newsBodyText() {
+
+    return Container(
         margin: EdgeInsets.symmetric(horizontal: AppMargin.m27),
-        child: Text(
-          newsController.newsbody(newsIndex),
-          style: getRegularStyle(
-              color: ColorManager.black, fontSize: FontSize.s14.sp),
-        ),
+        child: Html(
+          data: newsController.newsbody(newsIndex),
+        )
       );
+  }
 }

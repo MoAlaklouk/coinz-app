@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "4554845110",
+    "project_id": "coinz-fc3d3",
+    "storage_bucket": "coinz-fc3d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4554845110:android:35a4abdbdf11cca9896f17",
+        "android_client_info": {
+          "package_name": "com.example.coinz_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4554845110-s5m9am98n0gq92s5i2fidluu00bqqcul.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.coinz_app",
+            "certificate_hash": "bbf1e54f04f2a994f27d3d16822d93220653c2fb"
+          }
+        },
+        {
+          "client_id": "4554845110-f95chjj8trjrhjnp21n15p6ns5j31k0v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsA_Uuf8j2ME49x4WUNaViUUw7SEjv2s4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "4554845110-f95chjj8trjrhjnp21n15p6ns5j31k0v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

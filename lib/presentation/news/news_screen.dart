@@ -51,7 +51,7 @@ class NewsScreen extends StatelessWidget {
           AppString.newsTitel,
           style: getSemiBoldStyle(
             color: ColorManager.black,
-            fontSize: FontSize.s27.sp,
+            fontSize: FontSizeManager.s27.sp,
           ),
         ),
       );
@@ -123,7 +123,7 @@ class NewsScreen extends StatelessWidget {
                           maxLines: 4,
                           style: getRegularStyle(
                               color: ColorManager.black,
-                              fontSize: FontSize.s14.sp),
+                              fontSize: FontSizeManager.s14.sp),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),

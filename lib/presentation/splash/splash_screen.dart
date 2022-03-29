@@ -91,12 +91,12 @@ Widget textSplash(context) => Column(
           
           AppString.blocText,
           style: getSemiBoldStyle(
-              color: ColorManager.white, fontSize: FontSize.s25.sp,),
+              color: ColorManager.white, fontSize: FontSizeManager.s25.sp,),
         ),
         Text(
           AppString.chainText,
           style: getSemiBoldStyle(
-              color: ColorManager.white, fontSize: FontSize.s25.sp),
+              color: ColorManager.white, fontSize: FontSizeManager.s25.sp),
         ),
       ],
     );

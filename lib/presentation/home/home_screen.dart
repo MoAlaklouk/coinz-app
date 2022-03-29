@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../app/app_router/app_router.dart';
-import '../../data/model/coinz_model.dart';
-import '../../data/network/remote/loading.dart';
-import 'home_controller.dart';
-import '../layout/layout_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../app/app_router/app_router.dart';
 import '../../constant/assets_manager.dart';
 import '../../constant/color_manger.dart';
 import '../../constant/fonts_manager.dart';
@@ -13,9 +12,8 @@ import '../../constant/helper.dart';
 import '../../constant/string_manager.dart';
 import '../../constant/style_manager.dart';
 import '../../constant/value_manager.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../data/network/remote/loading.dart';
+import 'home_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -66,7 +64,7 @@ class HomeScreen extends StatelessWidget {
         child: Text(
           AppString.homeScreenTitel,
           style: getSemiBoldStyle(
-              color: ColorManager.black, fontSize: FontSize.s20.sp),
+              color: ColorManager.black, fontSize: FontSizeManager.s20.sp),
         ),
       );
   Widget lastUpdateText() => Container(
@@ -145,7 +143,7 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   controller.getNameFavourite(index),
                   style: getMediumStyle(
-                      color: ColorManager.white, fontSize: FontSize.s14.sp),
+                      color: ColorManager.white, fontSize: FontSizeManager.s14.sp),
                 ),
               ],
             ),
@@ -154,7 +152,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Text(controller.getValueOfFavourite(index),
                     style: TextStyle(
-                        color: ColorManager.white, fontSize: FontSize.s12.sp)),
+                        color: ColorManager.white, fontSize: FontSizeManager.s12.sp)),
                 Text(
                   AppString.dollarSign,
                   style: TextStyle(color: ColorManager.white),
@@ -218,7 +216,7 @@ class HomeScreen extends StatelessWidget {
                       '${index + 1}',
                       style: TextStyle(
                           color: ColorManager.lightGrey,
-                          fontSize: FontSize.s8.sp),
+                          fontSize: FontSizeManager.s8.sp),
                     ),
                   ),
                   Expanded(
@@ -240,7 +238,7 @@ class HomeScreen extends StatelessWidget {
                     child: Text(
                       controller.getNameCoinz(index),
                       style: getRegularStyle(
-                          color: ColorManager.black, fontSize: FontSize.s14.sp),
+                          color: ColorManager.black, fontSize: FontSizeManager.s14.sp),
                     ),
                   ),
                 ],
@@ -254,7 +252,7 @@ class HomeScreen extends StatelessWidget {
                   Text(controller.getValueOfCoinz(index),
                       style: TextStyle(
                           color: ColorManager.black,
-                          fontSize: FontSize.s13.sp)),
+                          fontSize: FontSizeManager.s13.sp)),
                   Text(
                     AppString.dollarSign,
                     style: TextStyle(color: ColorManager.lightGrey),

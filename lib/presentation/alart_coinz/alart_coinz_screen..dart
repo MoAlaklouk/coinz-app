@@ -1,21 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../constant/enums.dart';
-import '../../data/model/coinz_model.dart';
-import '../layout/layout_controller.dart';
-
-import '../../constant/assets_manager.dart';
-import '../../constant/color_manger.dart';
-import '../../constant/fonts_manager.dart';
-import '../../constant/icon_manager.dart';
-import '../../constant/string_manager.dart';
-import '../../constant/style_manager.dart';
-import '../../constant/value_manager.dart';
-import 'alart_coinz_controller.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
+import '../../constant/assets_manager.dart';
+import '../../constant/color_manger.dart';
+import '../../constant/enums.dart';
+import '../../constant/fonts_manager.dart';
+import '../../constant/icon_manager.dart';
+import '../../constant/string_manager.dart';
+import '../../constant/style_manager.dart';
+import '../../constant/value_manager.dart';
+import '../../data/model/coinz_model.dart';
+import '../layout/layout_controller.dart';
+import 'alart_coinz_controller.dart';
 
 class AlartScreen extends StatelessWidget {
   AlartScreen({Key? key}) : super(key: key);
@@ -74,7 +74,7 @@ class AlartScreen extends StatelessWidget {
         child: Text(
           AppString.alartTital,
           style: getSemiBoldStyle(
-              color: ColorManager.black, fontSize: FontSize.s20.sp),
+              color: ColorManager.black, fontSize: FontSizeManager.s20.sp),
         ),
       );
   Widget alartScreenCaptionTital() => Container(
@@ -123,7 +123,7 @@ class AlartScreen extends StatelessWidget {
           Text(
             item?.sName ?? 'اختار العملة',
             style: getRegularStyle(
-                color: ColorManager.black, fontSize: FontSize.s16.sp),
+                color: ColorManager.black, fontSize: FontSizeManager.s16.sp),
           ),
         ]),
       );
@@ -135,7 +135,7 @@ class AlartScreen extends StatelessWidget {
           AppString.selectAlartTital,
           style: getRegularStyle(
             color: ColorManager.grey,
-            fontSize: FontSize.s12.sp,
+            fontSize: FontSizeManager.s12.sp,
           ),
         ),
       );
@@ -232,7 +232,7 @@ class AlartScreen extends StatelessWidget {
             child: Text(
               AppString.newAlart,
               style: getRegularStyle(
-                  color: ColorManager.black, fontSize: FontSize.s17.sp),
+                  color: ColorManager.black, fontSize: FontSizeManager.s17.sp),
             )),
       );
 
@@ -272,7 +272,7 @@ class AlartScreen extends StatelessWidget {
                         AppString.textfavoriteCoinz,
                         style: getRegularStyle(
                             color: ColorManager.black,
-                            fontSize: FontSize.s15.sp),
+                            fontSize: FontSizeManager.s15.sp),
                       ),
                       SizedBox(
                         width: AppWidthSize.sw9,
@@ -281,7 +281,7 @@ class AlartScreen extends StatelessWidget {
                         AppString.textfavoriteCoinzEn,
                         style: getRegularStyle(
                             color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
+                            fontSize: FontSizeManager.s14.sp),
                       ),
                     ],
                   ),
@@ -291,7 +291,7 @@ class AlartScreen extends StatelessWidget {
                         AppString.equals,
                         style: getRegularStyle(
                             color: ColorManager.green,
-                            fontSize: FontSize.s14.sp),
+                            fontSize: FontSizeManager.s14.sp),
                       ),
                       SizedBox(
                         width: AppWidthSize.sw9,
@@ -300,7 +300,7 @@ class AlartScreen extends StatelessWidget {
                         AppString.price,
                         style: getRegularStyle(
                             color: ColorManager.green,
-                            fontSize: FontSize.s15.sp),
+                            fontSize: FontSizeManager.s15.sp),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -308,7 +308,7 @@ class AlartScreen extends StatelessWidget {
                         AppString.dollarSign,
                         style: getRegularStyle(
                           color: ColorManager.green,
-                          fontSize: FontSize.s15.sp,
+                          fontSize: FontSizeManager.s15.sp,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

@@ -32,7 +32,7 @@ ThemeData getApplicationTheme() {
       elevation: AppSize.s8,
       titleTextStyle: getRegularStyle(
         color: ColorManager.white,
-        fontSize: FontSize.s16,
+        fontSize: FontSizeManager.s16,
       ),
     ),
     buttonTheme: ButtonThemeData(
