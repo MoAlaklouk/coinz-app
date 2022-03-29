@@ -10,7 +10,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     getFavouritesCoinz();
-  
+
     super.onInit();
   }
 
@@ -20,7 +20,6 @@ class HomeController extends GetxController {
   factory HomeController() {
     return _instance;
   }
-
 
   LayoutController _layoutController = LayoutController.instance;
 
@@ -44,11 +43,16 @@ class HomeController extends GetxController {
     int indexOfSubString = _layoutController
         .currenciesModel!.currencies![index].dValue!
         .indexOf('.');
-    if (length > indexOfSubString + 2) {
-      return _layoutController.currenciesModel!.currencies![index].dValue!
-          .substring(0, indexOfSubString + 3);
-    } else {
+    if (indexOfSubString == -1) {
       return _layoutController.currenciesModel!.currencies![index].dValue!;
+      
+    } else {
+      if (length > indexOfSubString + 2) {
+        return _layoutController.currenciesModel!.currencies![index].dValue!
+            .substring(0, indexOfSubString + 3);
+      } else {
+        return _layoutController.currenciesModel!.currencies![index].dValue!;
+      }
     }
   }
 

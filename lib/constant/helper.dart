@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
@@ -20,3 +21,9 @@ int coinzPageNum = 1;
 int coinzPageCount = 20;
 int newsPageNum = 1;
 int newsPageCount = 7;
+var massageToken;
+
+void dismissKeyboard(){
+  FocusManager.instance.primaryFocus?.unfocus();
+
+}

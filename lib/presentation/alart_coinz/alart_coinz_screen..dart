@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:coinz_app/data/network/remote/loading.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../constant/assets_manager.dart';
@@ -21,46 +21,52 @@ class AlartScreen extends StatelessWidget {
   AlartScreen({Key? key}) : super(key: key);
   TextEditingController alartValueController = TextEditingController();
   var alartValueKey = GlobalKey<FormState>();
+  String? currenciesScode = '';
+  int iType = 2;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<AlartCoinzController>(
-        builder: (controller) => Form(
-          key: alartValueKey,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppPadding.p23),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: AppHeightSize.sh38,
-                ),
-                alartScreenTitel(),
-                alartScreenCaptionTital(),
-                SizedBox(
-                  height: AppHeightSize.sh9,
-                ),
-                selectCoinzDropdown(),
-                SizedBox(
-                  height: AppHeightSize.sh18,
-                ),
-                selectAlartTitel(),
-                SizedBox(
-                  height: AppHeightSize.sh9,
-                ),
-                alartDetailsButton(controller),
-                SizedBox(
-                  height: AppHeightSize.sh21,
-                ),
-                newAlartButton(),
-                SizedBox(
-                  height: AppHeightSize.sh31,
-                ),
-                Divider(),
-                SizedBox(
-                  height: AppHeightSize.sh20,
-                ),
-                Expanded(child: listOfAlart()),
-              ],
+        builder: (controller) => MyBuildCondition(
+          condition: alartModel != null,
+          builder: (context) => Form(
+            key: alartValueKey,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: AppPadding.p23),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: AppHeightSize.sh38,
+                  ),
+                  alartScreenTitel(),
+                  alartScreenCaptionTital(),
+                  SizedBox(
+                    height: AppHeightSize.sh9,
+                  ),
+                  selectCoinzDropdown(),
+                  SizedBox(
+                    height: AppHeightSize.sh18,
+                  ),
+                  selectAlartTitel(),
+                  SizedBox(
+                    height: AppHeightSize.sh9,
+                  ),
+                  alartDetailsButton(controller),
+                  SizedBox(
+                    height: AppHeightSize.sh21,
+                  ),
+                  newAlartButton(controller),
+                  SizedBox(
+                    height: AppHeightSize.sh31,
+                  ),
+                  Divider(),
+                  SizedBox(
+                    height: AppHeightSize.sh20,
+                  ),
+                  Expanded(child: listOfAlart(controller, context)),
+                ],
+              ),
             ),
           ),
         ),
@@ -87,6 +93,11 @@ class AlartScreen extends StatelessWidget {
       );
 
   Widget selectCoinzDropdown() => DropdownSearch<Currencies>(
+        validator: (value) {
+          if (value == null) {
+            return 'اختار العملة';
+          }
+        },
         items: currenciesItem,
         dropdownSearchDecoration: InputDecoration(
           border: OutlineInputBorder(
@@ -98,7 +109,7 @@ class AlartScreen extends StatelessWidget {
               horizontal: AppPadding.p12, vertical: AppPadding.p8),
         ),
         onChanged: (data) {
-          print(data!.sName);
+          currenciesScode = data!.sCode!;
         },
         dropdownBuilder: (context, selectedItem) =>
             selectCoinzDropdownItem(context, selectedItem),
@@ -167,7 +178,13 @@ class AlartScreen extends StatelessWidget {
                   .toList(),
               onChanged: (value) {
                 if (value == alartValue(AlartValue.MORETHAN)) {
-                  print(1);
+                  iType = 3;
+                }
+                if (value == alartValue(AlartValue.EQUAL)) {
+                  iType = 2;
+                }
+                if (value == alartValue(AlartValue.LESSTHAN)) {
+                  iType = 1;
                 }
 
                 controller.changeDropdownItem(value);
@@ -214,7 +231,7 @@ class AlartScreen extends StatelessWidget {
     );
   }
 
-  Widget newAlartButton() => Container(
+  Widget newAlartButton(AlartCoinzController controller) => Container(
         height: AppHeightSize.sh55,
         width: double.infinity,
         decoration: BoxDecoration(
@@ -226,7 +243,11 @@ class AlartScreen extends StatelessWidget {
         child: TextButton(
             onPressed: () {
               if (alartValueKey.currentState!.validate()) {
-                print('sccess');
+                controller.addAlart(
+                    sCode: currenciesScode!,
+                    iType: iType,
+                    dValue: alartValueController.text,
+                    sPnsToken: 'massageToken');
               }
             },
             child: Text(
@@ -236,95 +257,98 @@ class AlartScreen extends StatelessWidget {
             )),
       );
 
-  Widget listOfAlart() => ListView.separated(
-      itemBuilder: (context, index) => alartItem(),
+  Widget listOfAlart(controller, context) => ListView.separated(
+      itemBuilder: (context, index) => alartItem(controller, index, context),
       separatorBuilder: (context, index) => SizedBox(
             height: AppHeightSize.sh12,
           ),
-      itemCount: 2);
+      itemCount: alartModel!.condition!.length);
 
-  Widget alartItem() => Container(
-        height: AppHeightSize.sh56,
-        decoration: BoxDecoration(
-            border: Border.all(color: ColorManager.lightGreyBorder),
-            borderRadius: BorderRadius.circular(AppSize.s8)),
-        child: Container(
-          alignment: Alignment.center,
-          margin: EdgeInsets.symmetric(horizontal: AppMargin.m17),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                AssetsManager.homeCoinzIcon,
-                color: ColorManager.black,
+  Widget alartItem(AlartCoinzController controller, index, context) {
+    return Container(
+      height: AppHeightSize.sh56,
+      decoration: BoxDecoration(
+          border: Border.all(color: ColorManager.lightGreyBorder),
+          borderRadius: BorderRadius.circular(AppSize.s8)),
+      child: Container(
+        alignment: Alignment.center,
+        margin: EdgeInsets.symmetric(horizontal: AppMargin.m17),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CachedNetworkImage(
+              imageUrl: controller.getCoinzImageUrl(index),
+              imageBuilder: (context, image) => Image(
+                image: image,
                 height: AppHeightSize.sh20,
               ),
-              SizedBox(
-                width: AppWidthSize.sw14,
+              errorWidget: (context, url, error) => Icon(IconManager.error),
+              placeholder: (context, url) => CircleAvatar(
+                radius: AppHeightSize.sh10,
+                backgroundColor: ColorManager.lightGreyBorder,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        AppString.textfavoriteCoinz,
-                        style: getRegularStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSizeManager.s15.sp),
-                      ),
-                      SizedBox(
-                        width: AppWidthSize.sw9,
-                      ),
-                      Text(
-                        AppString.textfavoriteCoinzEn,
-                        style: getRegularStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSizeManager.s14.sp),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        AppString.equals,
-                        style: getRegularStyle(
-                            color: ColorManager.green,
-                            fontSize: FontSizeManager.s14.sp),
-                      ),
-                      SizedBox(
-                        width: AppWidthSize.sw9,
-                      ),
-                      Text(
-                        AppString.price,
-                        style: getRegularStyle(
-                            color: ColorManager.green,
-                            fontSize: FontSizeManager.s15.sp),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Text(
-                        AppString.dollarSign,
-                        style: getRegularStyle(
+            ),
+            SizedBox(
+              width: AppWidthSize.sw14,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      controller.getNameCoinz(index),
+                      style: getRegularStyle(
+                          color: ColorManager.black,
+                          fontSize: FontSizeManager.s15.sp),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      controller.getIType(index),
+                      style: getRegularStyle(
                           color: ColorManager.green,
-                          fontSize: FontSizeManager.s15.sp,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                          fontSize: FontSizeManager.s14.sp),
+                    ),
+                    SizedBox(
+                      width: AppWidthSize.sw9,
+                    ),
+                    Text(
+                      controller.getValueOfCoinz(index),
+                      style: getRegularStyle(
+                          color: ColorManager.green,
+                          fontSize: FontSizeManager.s15.sp),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      AppString.dollarSign,
+                      style: getRegularStyle(
+                        color: ColorManager.green,
+                        fontSize: FontSizeManager.s15.sp,
                       ),
-                    ],
-                  ),
-                ],
-              ),
-              Spacer(),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(IconManager.delete),
-                color: ColorManager.green,
-              ),
-            ],
-          ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Spacer(),
+            IconButton(
+              onPressed: () {
+                controller.deleteAlart(
+                    id: alartModel!.condition![index].pkIId!);
+              },
+              icon: Icon(IconManager.delete),
+              color: ColorManager.green,
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 }

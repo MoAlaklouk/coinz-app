@@ -9,3 +9,4 @@ const FAVOURITES = 'favourites/list';
 const ADDFAVOURITES = 'favourites';
 const NEWS = 'news/list';
 const ADDALART = 'triggers';
+const GETALART = 'triggers/list';

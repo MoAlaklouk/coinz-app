@@ -72,10 +72,16 @@ class CoinzItemController extends GetxController {
   String getValueOfCoinz(int index) {
     var length = currenciesItem![index].dValue!.length;
     int indexOfSubString = currenciesItem![index].dValue!.indexOf('.');
-    if (length > indexOfSubString + 2) {
-      return currenciesItem![index].dValue!.substring(0, indexOfSubString + 3);
-    } else {
+    if (indexOfSubString == -1) {
       return currenciesItem![index].dValue!;
+    } else {
+      if (length > indexOfSubString + 2) {
+        return currenciesItem![index]
+            .dValue!
+            .substring(0, indexOfSubString + 3);
+      } else {
+        return currenciesItem![index].dValue!;
+      }
     }
   }
 
@@ -91,7 +97,7 @@ class CoinzItemController extends GetxController {
         withLoading: true,
         body: {
           's_currency': s_currency,
-          's_udid': myAppController.deviceData['id'],
+          's_udid': myAppController.deviceinfo['id'],
         }).request(
       onSuccess: (data, response) {
         addModel = AddModel.fromJson(response);

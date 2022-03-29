@@ -37,11 +37,11 @@ class ApiRequest {
           'Accept-Encoding': 'gzip, deflate, br',
           'Connection': 'keep-alive',
 
-          'X-Client-Device-UDID': _myAppController.deviceData['id'],
+          'X-Client-Device-UDID': _myAppController.deviceinfo['id'],
 
           'HeaderClientLanguageValue': 'ar',
-          'HeaderClientDeviceTypeValue': _myAppController.deviceData['id'],
-          'HeaderClientPlatformName': _myAppController.deviceData['id'],
+          // 'HeaderClientDeviceTypeValue': _myAppController.deviceData['id'],
+          // 'HeaderClientPlatformName': _myAppController.deviceData['id'],
 
 
 
