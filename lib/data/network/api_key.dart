@@ -1,4 +1,4 @@
-const baseUrl = 'http://newlinetech.site/currency/api/v1/';
+const baseUrl = 'https://newline.dev/currency/api/v1/';
 
 const cUserData = 'user_data';
 const homeData = 'home_data';

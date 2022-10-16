@@ -110,7 +110,6 @@ class HomeScreen extends StatelessWidget {
           },
         ));
   }
-
   Widget favoriteCoinzItem(HomeController controller, index) => Container(
         clipBehavior: Clip.antiAliasWithSaveLayer,
         decoration: BoxDecoration(
@@ -143,7 +142,8 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   controller.getNameFavourite(index),
                   style: getMediumStyle(
-                      color: ColorManager.white, fontSize: FontSizeManager.s14.sp),
+                      color: ColorManager.white,
+                      fontSize: FontSizeManager.s14.sp),
                 ),
               ],
             ),
@@ -152,7 +152,8 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Text(controller.getValueOfFavourite(index),
                     style: TextStyle(
-                        color: ColorManager.white, fontSize: FontSizeManager.s12.sp)),
+                        color: ColorManager.white,
+                        fontSize: FontSizeManager.s12.sp)),
                 Text(
                   AppString.dollarSign,
                   style: TextStyle(color: ColorManager.white),
@@ -162,7 +163,6 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       );
-
   Widget newFavoriteCoinzIteme(controller) => Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSize.s8),
@@ -192,7 +192,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       );
-
   Widget coinzSliverList(HomeController controller) => SliverList(
         delegate: SliverChildBuilderDelegate(
           ((BuildContext context, int index) =>
@@ -200,7 +199,6 @@ class HomeScreen extends StatelessWidget {
           childCount: 17,
         ),
       );
-
   Widget coinzListItem(index, HomeController controller) => Container(
         margin: EdgeInsets.symmetric(horizontal: AppMargin.m4),
         height: AppHeightSize.sh35,
@@ -238,7 +236,8 @@ class HomeScreen extends StatelessWidget {
                     child: Text(
                       controller.getNameCoinz(index),
                       style: getRegularStyle(
-                          color: ColorManager.black, fontSize: FontSizeManager.s14.sp),
+                          color: ColorManager.black,
+                          fontSize: FontSizeManager.s14.sp),
                     ),
                   ),
                 ],

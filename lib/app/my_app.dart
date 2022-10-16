@@ -19,19 +19,16 @@ class MyApp extends StatelessWidget {
       statusBarIconBrightness: Brightness.dark,
     ));
     return ScreenUtilInit(
-      minTextAdapt: true,
-      builder: () {
-        return GetMaterialApp(
-          locale: const Locale(AppString.lang),
-          debugShowCheckedModeBanner: false,
-          initialBinding: Binding(),
-          getPages: appRoutes,
-          theme: getApplicationTheme(),
-          builder: (context, child) {
-            return FlutterSmartDialog(child: child);
-          },
-        );
-      },
-    );
+        minTextAdapt: true,
+        builder: (context, child) => GetMaterialApp(
+              locale: const Locale(AppString.lang),
+              debugShowCheckedModeBanner: false,
+              initialBinding: Binding(),
+              getPages: appRoutes,
+              theme: getApplicationTheme(),
+              builder: (context, child) {
+                return FlutterSmartDialog(child: child);
+              },
+            ));
   }
 }
