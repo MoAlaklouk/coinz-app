@@ -1,14 +1,16 @@
 import 'dart:io';
 
+import '../api/log.dart';
+
 import 'device_info.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../data/network/api_key.dart';
-import '../data/network/local/local_storage.dart';
-import '../data/network/remote/log.dart';
+import '../utils/local_storage.dart';
+import '../api/api_key.dart';
+
 
 class MyAppController extends GetxController {
   dynamic userData;

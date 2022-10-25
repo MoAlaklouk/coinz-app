@@ -1,10 +1,9 @@
 import 'package:get/get.dart';
 
-import '../../constant/value_manager.dart';
-import '../../presentation/coinz_item/coinz_item_screen.dart';
-import '../../presentation/layout/layout_screen.dart';
-import '../../presentation/news_details/news_details_screen.dart';
-import '../../presentation/splash/splash_screen.dart';
+import '../../module/coinz_item/coinz_item_screen.dart';
+import '../../module/layout/layout_screen.dart';
+import '../../module/news/news_details/news_details_screen.dart';
+import '../../module/splash/splash_screen.dart';
 
 class Routes {
   static const String splashRoute = '/';
@@ -18,24 +17,24 @@ List<GetPage<dynamic>> appRoutes = [
     name: Routes.splashRoute,
     page: () => const SplashScreen(),
     transition: Transition.fade,
-    transitionDuration: Duration(seconds: AppDuration.d1),
+    transitionDuration: Duration(seconds: 1),
   ),
   GetPage(
     name: Routes.layoutRoute,
     page: () => const LayoutScreen(),
     transition: Transition.fade,
-    transitionDuration: Duration(seconds: AppDuration.d1),
+    transitionDuration: Duration(seconds: 1),
   ),
   GetPage(
     name: Routes.newsDetailsRoute,
-    page: () =>  NewsDetailsScreen(),
+    page: () => NewsDetailsScreen(),
     transition: Transition.fade,
-    transitionDuration: Duration(seconds: AppDuration.d1),
+    transitionDuration: Duration(seconds: 1),
   ),
   GetPage(
     name: Routes.coinzItemRoute,
-    page: () =>  CoinzItemScreen(),
+    page: () => CoinzItemScreen(),
     transition: Transition.fade,
-    transitionDuration: Duration(seconds: AppDuration.d1),
+    transitionDuration: Duration(seconds: 1),
   ),
 ];
