@@ -71,7 +71,6 @@ class NewsScreen extends StatelessWidget {
           Get.toNamed(Routes.newsDetailsRoute, arguments: index);
         },
         child: Container(
-          height: 107.h,
           padding: EdgeInsets.all(8.w),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),

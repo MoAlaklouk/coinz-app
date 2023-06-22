@@ -30,8 +30,8 @@ class HomeScreen extends StatelessWidget {
               SliverAppBar(
                 expandedHeight:
                     controller.favouritesModel!.favourites!.length < 2
-                        ? 190.h
-                        : 295.h,
+                        ? 190
+                        : 295,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Column(
                     children: [
